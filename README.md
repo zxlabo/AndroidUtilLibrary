@@ -1,3 +1,16 @@
+使用
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        implementation 'com.github.zxlabo:AndroidUtilLibrary:Tag'
+	}
+
 # 一、工具类库简介
 
 ## 1、当前存在的问题
