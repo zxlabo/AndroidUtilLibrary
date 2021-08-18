@@ -10,6 +10,10 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 /**
  * author : Naruto
@@ -169,6 +173,30 @@ inline fun View.afterMeasured(crossinline callback: View.() -> Unit) {
         }
     })
 }
+val View.viewScope: CoroutineScope
+    get() {
+        // 获取现有 viewScope 对象
+        val key = "ViewScope".hashCode()
+        var scope = getTag(key) as? CoroutineScope
+        // 若不存在则新建 viewScope 对象
+        if (scope == null) {
+            scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+            // 将 viewScope 对象缓存为 View 的 tag
+            setTag(key,scope)
+            val listener = object : View.OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(v: View?) {
+                }
+
+                override fun onViewDetachedFromWindow(v: View?) {
+                    // 当 view detach 时 取消协程的任务
+                    scope.cancel()
+                }
+
+            }
+            addOnAttachStateChangeListener(listener)
+        }
+        return scope
+    }
 
 
 
