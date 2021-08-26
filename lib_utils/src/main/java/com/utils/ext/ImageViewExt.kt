@@ -1,10 +1,7 @@
 package com.utils.ext
 
 import android.widget.ImageView
-import com.bumptech.glide.Glide
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * author : Naruto
@@ -16,8 +13,8 @@ import kotlinx.coroutines.withContext
  */
 fun ImageView.load(url: String) {
     viewScope.launch {
-        val bitmap = Glide.with(context).asBitmap().load(url).submit().get()
-        withContext(Dispatchers.Main) { setImageBitmap(bitmap) }
+//        val bitmap = Glide.with(context).asBitmap().load(url).submit().get()
+//        withContext(Dispatchers.Main) { setImageBitmap(bitmap) }
     }
 }
 
