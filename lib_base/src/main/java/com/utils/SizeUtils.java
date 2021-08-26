@@ -1,10 +1,16 @@
 package com.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 /**
  * dp2px, px2dp     : dp 与 px 转换
@@ -166,6 +172,36 @@ public final class SizeUtils {
         return new int[]{view.getMeasuredWidth(), view.getMeasuredHeight()};
     }
 
+    public static int getDisplayWidthInPx(@NonNull Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (wm != null) {
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            return size.x;
+        }
+        return 0;
+    }
+    public static int getDisplayHeightInPx(@NonNull Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (wm != null) {
+            Display display = wm.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            return size.y;
+        }
+        return 0;
+    }
+
+    public static int getStatusBarDimensionPx() {
+        int statusBarHeight = 0;
+        Resources res = AppGlobals.INSTANCE.getContext().getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = res.getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
 
     public interface OnGetSizeListener {
         void onGetSize(View view);
