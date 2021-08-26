@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--toolbat mean的字体颜色和大小-->
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="actionMenuTextColor">#ffffff</item> <!--menu字体颜色-->
+        <item name="android:textSize">15sp</item> <!--menu字体大小-->
+    </style>
+    <!-- toolbar menu style -->
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/toolbar_text_color</item>
+        <item name="android:textColorSecondary">@color/toolbar_text_color</item>
+        <item name="android:textColorPrimary">@color/toolbar_text_color</item>
+        <item name="actionMenuTextColor">@color/toolbar_text_color</item>
+    </style>
+
+    <!-- Toolbar自定义标题文字大小 -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>
