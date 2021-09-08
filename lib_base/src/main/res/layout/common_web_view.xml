@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         style="?android:attr/progressBarStyleHorizontal"
         android:max="100"
-        android:progress="80"
+        android:visibility="gone"
         android:progressDrawable="@drawable/web_view_progress_color"
         android:layout_height="8dp" />
 
