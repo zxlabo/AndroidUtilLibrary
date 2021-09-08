@@ -1,12 +1,11 @@
 package com.ui.activity
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.StyleRes
-import com.ui.helper.ToolBarHelper
 import com.utils.BarUtils
 import com.utils.databinding.ActivityBaseBinding
 
@@ -24,7 +23,7 @@ viewBinding = true
 3、如果需要自定义，可以隐藏标题栏，在xml里面添加标题栏。
 4、AppBarLayout作用设置状态栏和padding
  */
-abstract class BaseToolBarActivity : BaseLifecycleActivity() {
+open class BaseToolBarActivity : BaseLifecycleActivity() {
 
     private lateinit var mBinding: ActivityBaseBinding
     protected val mActivity by lazy { this }
@@ -32,16 +31,15 @@ abstract class BaseToolBarActivity : BaseLifecycleActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityBaseBinding.inflate(layoutInflater)
-        super.setContentView(mBinding.root)
         ToolBarHelper.setTranslucentStatus(window)
-    }
-
-    override fun setContentView(view: View?) {
-        initToolBar(view)
     }
 
     override fun setContentView(layoutId: Int) {
         setContentView(View.inflate(this, layoutId, null))
+    }
+
+    override fun setContentView(view: View?) {
+        initToolBar(view)
     }
 
     /**
@@ -58,40 +56,41 @@ abstract class BaseToolBarActivity : BaseLifecycleActivity() {
     fun setStatusBarColor(color: Int) {
         ToolBarHelper.setStatusBarColor(window, color)
     }
-    /**
-     * 设置状态栏颜色
-     */
-    abstract fun getAppBarColor(): Int
-
-    /**
-     * 设置标题栏颜色
-     */
-    abstract fun getToolBarColor(): Int
-
-    fun getAppBar()=mBinding.toolsBar.appbar
 
     fun hideAppBar() {
         mBinding.toolsBar.appbar.visibility = View.GONE
     }
 
-    fun getToolBar()= mBinding.toolsBar.toolbar
-
     fun hideToolBar() {
         mBinding.toolsBar.toolbar.visibility = View.GONE
-    }
-    fun setToolBarTitleTextAppearance(@StyleRes resId: Int) {
-        mBinding.toolsBar.toolbar.setTitleTextAppearance(mActivity, resId)
     }
 
     /**
      * 对ToolBar的封装
      */
     private fun initToolBar(view: View?) {
+        super.setContentView(mBinding.root)
         view ?: return
         //添加view
         mBinding.rootLayout.addView(view, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         //设置标题栏
-        ToolBarHelper.setToolBar(mActivity, mBinding.toolsBar.appbar, mBinding.toolsBar.toolbar, getAppBarColor(), getToolBarColor())
+        ToolBarHelper.setToolBar(mActivity, mBinding.toolsBar.appbar, mBinding.toolsBar.toolbar, getAppBarColor(), getToolBarColor(),isShowBackButton())
+    }
+
+    open fun isShowBackButton(): Boolean=true
+
+    /**
+     * 设置状态栏颜色
+     */
+    open fun getAppBarColor(): Int {
+        return Color.parseColor("#03a9f4")
+    }
+
+    /**
+     * 设置标题栏颜色
+     */
+    open fun getToolBarColor(): Int {
+        return Color.parseColor("#03a9f4")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

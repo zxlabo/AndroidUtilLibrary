@@ -2,7 +2,6 @@ package com.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ui.helper.BaseLifecycleObserver
 
 /**
  * author : Naruto
