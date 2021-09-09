@@ -1,7 +1,6 @@
 package com.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.net.http.SslError
@@ -28,8 +27,8 @@ import com.utils.ext.showToast
 abstract class CommonWebViewActivity : BaseToolBarActivity() {
     private var mWebView: WebView? = null
     private lateinit var url: String
-    private lateinit var mFrameLayout:FrameLayout
-    private var mProgressBar:ProgressBar? = null
+    private lateinit var mFrameLayout: FrameLayout
+    private var mProgressBar: ProgressBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +41,8 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
             }
         }
         setContentView(getLayout())
-        mFrameLayout=getFrameLayout()
-        mProgressBar=getProgressBar()
+        mFrameLayout = getFrameLayout()
+        mProgressBar = getProgressBar()
         url = initUrl()
         addWebView()
         initWebView()
@@ -55,7 +54,7 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
 
     @SuppressLint("WrongViewCast")
     open fun getFrameLayout(): FrameLayout {
-      return findViewById<FrameLayout>(R.id.fl_web_view)
+        return findViewById<FrameLayout>(R.id.fl_web_view)
     }
 
     @SuppressLint("WrongViewCast")
@@ -212,17 +211,18 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
             //handleMessage(Message msg); // 进行其他处理
         }
 
-        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-            if (TextUtils.isEmpty(url)) return true
+        /**
+         * 返回true，取消当前加载。否则返回false。
+         * super.shouldOverrideUrlLoading(view, request)默认返回false
+         */
+        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
             //JS调用Android，对协议进行处理
-            shouldOverrideUrlLoading(mActivity, url)
-            return true
+            return dealUrl(view, request)
         }
 
     }
 
-    abstract fun shouldOverrideUrlLoading(context: Context, url: String)
-
+    open fun dealUrl(view: WebView?, request: WebResourceRequest?): Boolean = false
 
     /**
      * WebChromeClient
