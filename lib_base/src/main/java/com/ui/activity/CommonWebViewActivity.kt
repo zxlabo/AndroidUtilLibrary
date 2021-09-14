@@ -26,7 +26,7 @@ import com.utils.ext.showToast
  */
 abstract class CommonWebViewActivity : BaseToolBarActivity() {
     private var mWebView: WebView? = null
-    private lateinit var url: String
+    private lateinit var webUrl: String
     private lateinit var mFrameLayout: FrameLayout
     private var mProgressBar: ProgressBar? = null
 
@@ -43,9 +43,16 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
         setContentView(getLayout())
         mFrameLayout = getFrameLayout()
         mProgressBar = getProgressBar()
-        url = initUrl()
         addWebView()
         initWebView()
+        loadUrl(initUrl())
+    }
+
+    fun loadUrl(url: String?) {
+        if (!TextUtils.isEmpty(url)){
+            webUrl =url!!
+            mWebView?.loadUrl(webUrl)
+        }
     }
 
     abstract fun initUrl(): String
@@ -81,9 +88,7 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
      */
     @SuppressLint("SetJavaScriptEnabled", "ObsoleteSdkInt", "JavascriptInterface")
     private fun initWebView() {
-        if (TextUtils.isEmpty(url)) return
         mWebView?.let {
-            it.loadUrl(url)
             //对WebView进行配置和管理
             val webSettings = it.settings
             //设置与JS交互的权限
@@ -124,8 +129,8 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
      * 页面刷新
      */
     fun refreshView() {
-        if (mWebView != null && !TextUtils.isEmpty(url)) {
-            mWebView?.loadUrl(url)
+        if (mWebView != null && !TextUtils.isEmpty(webUrl)) {
+            mWebView?.loadUrl(webUrl)
         }
     }
 
