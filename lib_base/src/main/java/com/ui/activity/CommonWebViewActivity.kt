@@ -205,8 +205,8 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
 
 
         //加载页面的服务器出现错误时（如404）调用。
-        override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-            showToast("加载错误")
+        override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+            webViewLoadError(view,request,error)
         }
 
         //webView默认是不处理https请求的，页面显示空白，需要进行如下设置
@@ -224,6 +224,11 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
             //JS调用Android，对协议进行处理
             return dealUrl(view, request)
         }
+
+    }
+
+    private fun webViewLoadError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+
 
     }
 
