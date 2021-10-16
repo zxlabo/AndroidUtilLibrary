@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ITabLayout{
+    Tab findTab(@NonNull D data);
+    void addTabSelectedChangeListener(OnTabSelectedListener<D> listener);
+    void defaultSelected(@NonNull D defaultInfo);
+    void inflateInfo(@NonNull List<D> infoList);
+    }
+note top: 外层容器控件接口
+ITabLayout ..> OnTabSelectedListener
+
+class TabTopLayout{
+TabTopView selectTabView;
+}
+
+TabTopLayout ..> TabTopView
+TabTopLayout  --|> HorizontalScrollView
+
+interface ITabView{
+void setHiTabInfo(@NonNull D data);
+}
+note top:顶部单个Tab控件的对外接口
+
+class TabTopView{
+TabTopBean tabTopBean
+}
+note right: 顶部单个Tab控件
+ITabView <|.. TabTopView
+
+TabTopView ..> TabTopBean
+
+
+
+class TabTopBean{
+Color defaultTextColor;
+Color selectTextColor;
+String defaultTextMsg;
+String selectTextMsg;
+@DrawableRes int defaultIcon
+@DrawableRes int selectIcon
+}
+note left:单个tab的数据模型
+
+
+interface OnTabSelectedListener<D> {
+        void onTabSelectedChange(int index,
+ @Nullable D prevInfo, @NonNull D nextInfo);
+    }
+note bottom: tab选中回调监听
+
+
+ITabLayout <|.. TabTopLayout
+@enduml

@@ -1,0 +1,16 @@
+ext {
+
+    config = [
+            applicationId: "com.library",
+            versionCode  : 1,
+            versionName  : "1.0"
+    ]
+
+    android = [
+            compileSdkVersion       : 30,
+            buildToolsVersion       : "30.0.3",
+            minSdkVersion           : 21,
+            targetSdkVersion        : 30
+    ]
+
+}

@@ -1,0 +1,72 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IRefresh{
+    void setDisableRefreshScroll(boolean disableRefreshScroll);
+
+    void refreshFinished();
+
+    void setRefreshListener(IRefreshListener iRefreshListener);
+
+    void setRefreshOverView(AbsOverView absOverView);
+
+}
+note left:Refresh对外暴露的接口
+interface IRefreshListener {
+
+        void onRefresh();
+
+        boolean enableRefresh();
+}
+
+note left:刷新监听listener
+IRefreshListener  <..  IRefresh
+
+class HiRefreshLayout{
+ HiRefreshState mState;
+ AbsOverView absOverView;
+ IRefreshListener mIRefreshListener;
+}
+note right:容器控件
+IRefresh <|.. HiRefreshLayout
+HiRefreshLayout ..> AsbOverView
+HiRefreshLayout ..> AutoScroller
+HiRefreshLayout ..> CommonGestureDetector
+HiRefreshLayout ..> HiRefreshState
+class CommonGestureDetector
+note bottom:手势监听器
+class AutoScroller
+note bottom:配合HiRefreshLayout进行滚动
+
+enum HiRefreshState {
+        STATE_INIT,
+        STATE_VISIBLE,
+        STATE_OVER,
+        STATE_REFRESH,
+        STATE_OVER_RELEASE
+}
+note left:刷新状态
+
+abstract AsbOverView{
+
+    abstract void init();
+
+    abstract void onScroll(int scrollY, int pullRefreshHeight);
+
+    abstract void onVisible();
+
+    abstract void onOver();
+
+    abstract void onRefresh();
+
+    abstract void onFinish();
+
+    void setState(HiRefreshState state)
+
+    HiRefreshState getState()
+}
+note top :顶部刷新视图
+AsbOverView ..> HiRefreshState
+
+
+@enduml

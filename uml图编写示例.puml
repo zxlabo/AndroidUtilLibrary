@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+'1、继承 ArrayList 继承自 AbstractList
+AbstractList <|-- ArrayList :ArrayList 继承自 AbstractList <
+abstract AbstractList{
+  getSize()
+}
+'2、实现 Student 实现接口 IPerson
+IPerson <|..Student : Student 实现接口 IPerson
+class Student{
+}
+interface IPerson{
+  void eat()
+}
+'3、依赖 Human使用到了Food,Human 依赖 Food
+Food <..Human : Human 依赖 Food
+
+class Food
+
+class Human{
+void eat(Food)
+}
+'4、备注
+class Foo
+note top: 这是备注
+@enduml

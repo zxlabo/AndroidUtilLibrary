@@ -3,11 +3,18 @@ package com.utils.ext
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CoroutineScope
@@ -198,5 +205,58 @@ val View.viewScope: CoroutineScope
         return scope
     }
 
+fun TextView.setBoldText(defaultText: String?, boldMsg:String?, color: Int?, size: Int) {
+    defaultText ?: return
+    val textSpanned1 = SpannableString(defaultText)
+    boldMsg?.let { doc ->
+        val index = defaultText.indexOf(doc)
+        if (index > -1) {
+            color?.let {
+                textSpanned1.setSpan(
+                    ForegroundColorSpan(color),
+                    index, index + doc.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE
+                )
+            }
+            textSpanned1.setSpan(
+                StyleSpan(Typeface.BOLD),
+                index, index + doc.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            textSpanned1.setSpan(
+                AbsoluteSizeSpan(size, true),
+                index, index + doc.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE
+            )
+        }
+    }
+    this.text = textSpanned1
+}
 
-
+fun TextView.setBoldText(defaultText: String?, boldList: List<String>?, color: Int?, size: Int?=null,isBold:Boolean=true) {
+    defaultText ?: return
+    val textSpanned1 = SpannableString(defaultText)
+    boldList?.forEach { doc ->
+        val indexMsg=defaultText
+        var index = indexMsg.indexOf(doc)
+        while (index > -1) {
+            color?.let {
+                textSpanned1.setSpan(
+                    ForegroundColorSpan(color),
+                    index, index + doc.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            if (isBold){
+                textSpanned1.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    index, index + doc.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            size?.let {
+                textSpanned1.setSpan(
+                    AbsoluteSizeSpan(size, true),
+                    index, index + doc.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            index=indexMsg.indexOf(doc,index+1)
+        }
+    }
+    this.text = textSpanned1
+}

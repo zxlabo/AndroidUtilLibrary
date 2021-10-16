@@ -1,3 +1,4 @@
 rootProject.name = "AndroidUtilLibrary"
 include ':app'
 include ':lib_base'
+include ':common'
