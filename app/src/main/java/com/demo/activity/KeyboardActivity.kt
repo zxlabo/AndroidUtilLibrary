@@ -1,6 +1,7 @@
 package com.demo.activity
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import com.utils.SoftHideKeyBoardUtil
 import com.library.R
 import com.ui.activity.BaseToolBarActivity
@@ -20,5 +21,11 @@ class KeyboardActivity : BaseToolBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyboard)
         SoftHideKeyBoardUtil.assistActivity(this)
+
+        supportFragmentManager.beginTransaction().commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 }

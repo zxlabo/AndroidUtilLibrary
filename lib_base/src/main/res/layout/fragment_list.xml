@@ -31,4 +31,5 @@
     <!--        android:indeterminateTint="@color/color_999" />>-->
 
     <include layout="@layout/layout_content_loading_view" />
+
 </FrameLayout>

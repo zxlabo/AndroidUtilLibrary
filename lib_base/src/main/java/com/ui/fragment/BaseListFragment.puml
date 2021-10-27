@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+'1、继承 ArrayList 继承自 AbstractList
+BaseListFragment <|-- BaseFragment
+
+abstract BaseListFragment{
+  int pageSize;
+  int layoutId;
+
+  LayoutManager createLayoutManager();
+  Boolean enableRefresh()
+  void onRefresh()
+  void finishRefresh()
+  Boolean enableLoadMore()
+}
+@enduml

@@ -24,7 +24,7 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
     private var recyclerViewRef: WeakReference<RecyclerView>? = null
     private var mContext: Context = context
     private var mInflater = LayoutInflater.from(context)
-    private var dataSets = java.util.ArrayList<CommonDataItem<*, out ViewHolder>>()
+    private var dataSets = java.util.ArrayList<CommonItemAdapter<*, out ViewHolder>>()
 
     private val typePositions = SparseIntArray();
 
@@ -83,13 +83,13 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
      */
     fun addItemAt(
         index: Int,
-        dataItem: CommonDataItem<*, out ViewHolder>,
+        itemAdapter: CommonItemAdapter<*, out ViewHolder>,
         notify: Boolean
     ) {
         if (index >= 0) {
-            dataSets.add(index, dataItem)
+            dataSets.add(index, itemAdapter)
         } else {
-            dataSets.add(dataItem)
+            dataSets.add(itemAdapter)
         }
 
         val notifyPos = if (index >= 0) index else dataSets.size - 1
@@ -97,29 +97,29 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
             notifyItemInserted(notifyPos)
         }
 
-        dataItem.setAdapter(this)
+        itemAdapter.setAdapter(this)
     }
 
     /**
      * 往现有集合的尾部逐年items集合
      */
-    fun addItems(items: List<CommonDataItem<*, out ViewHolder>>, notify: Boolean) {
+    fun addItems(itemAdapters: List<CommonItemAdapter<*, out ViewHolder>>, notify: Boolean) {
         val start = dataSets.size
-        items.forEach { dataItem ->
+        itemAdapters.forEach { dataItem ->
             dataSets.add(dataItem)
             dataItem.setAdapter(this)
         }
         if (notify) {
-            notifyItemRangeInserted(start, items.size)
+            notifyItemRangeInserted(start, itemAdapters.size)
         }
     }
 
     /**
      * 从指定位置上移除item
      */
-    fun removeItemAt(index: Int): CommonDataItem<*, out ViewHolder>? {
+    fun removeItemAt(index: Int): CommonItemAdapter<*, out ViewHolder>? {
         if (index >= 0 && index < dataSets.size) {
-            val remove: CommonDataItem<*, out ViewHolder> = dataSets.removeAt(index)
+            val remove: CommonItemAdapter<*, out ViewHolder> = dataSets.removeAt(index)
             notifyItemRemoved(index)
             return remove
         } else {
@@ -130,16 +130,16 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
     /**
      * 移除指定item
      */
-    fun removeItem(dataItem: CommonDataItem<*, out ViewHolder>) {
-        val index: Int = dataSets.indexOf(dataItem)
+    fun removeItem(itemAdapter: CommonItemAdapter<*, out ViewHolder>) {
+        val index: Int = dataSets.indexOf(itemAdapter)
         removeItemAt(index)
     }
 
     /**
      * 指定刷新 某个item的数据
      */
-    fun refreshItem(dataItem: CommonDataItem<*, out ViewHolder>) {
-        val indexOf = dataSets.indexOf(dataItem)
+    fun refreshItem(itemAdapter: CommonItemAdapter<*, out ViewHolder>) {
+        val indexOf = dataSets.indexOf(itemAdapter)
         notifyItemChanged(indexOf)
     }
 
@@ -209,7 +209,7 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
     }
 
     private fun createViewHolderInternal(
-        javaClass: Class<CommonDataItem<*, out ViewHolder>>,
+        javaClass: Class<CommonItemAdapter<*, out ViewHolder>>,
         view: View
     ): ViewHolder {
         //得到该Item的父类类型,即为HiDataItem.class。  class 也是type的一个子类。
@@ -288,10 +288,10 @@ class CommonAdapter(context: Context) : Adapter<ViewHolder>() {
         return recyclerViewRef?.get()
     }
 
-    fun getItem(position: Int): CommonDataItem<*, ViewHolder>? {
+    fun getItem(position: Int): CommonItemAdapter<*, ViewHolder>? {
         if (position < 0 || position >= dataSets.size)
             return null
-        return dataSets[position] as CommonDataItem<*, ViewHolder>
+        return dataSets[position] as CommonItemAdapter<*, ViewHolder>
     }
 
     override fun onViewAttachedToWindow(holder: ViewHolder) {

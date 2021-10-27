@@ -51,6 +51,8 @@ class RefreshActivity : AppCompatActivity() {
                 myDataset
             )
         recyclerView!!.setAdapter(mAdapter)
+        layoutManager.reverseLayout=true
+        layoutManager.stackFromEnd=true
     }
 
     class MyAdapter // Provide a suitable constructor (depends on the kind of dataset)

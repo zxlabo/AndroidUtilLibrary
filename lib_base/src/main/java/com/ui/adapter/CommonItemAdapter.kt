@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class CommonDataItem<DATA, VH : RecyclerView.ViewHolder>(data: DATA? = null) {
+abstract class CommonItemAdapter<DATA, VH : RecyclerView.ViewHolder>(data: DATA? = null) {
     val TAG: String = "HiDataItem";
     var hiAdapter: CommonAdapter? = null
     var mData: DATA? = null

@@ -11,8 +11,9 @@ abstract class BaseVmActivity<VM : BaseViewModel> : BaseToolBarActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initData()
         initObserver()
+        initData()
+
     }
 
     abstract fun initView()

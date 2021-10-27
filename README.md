@@ -1,1 +1,2 @@
-封装的工具类和ui库
+1、project_config.gradle文件配置版本号project相关信息
+2、dependencies.gradle配置依赖三方库相关信息

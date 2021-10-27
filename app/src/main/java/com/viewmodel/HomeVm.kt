@@ -1,5 +1,6 @@
 package com.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.common.base.BaseViewModel
 
 /**
@@ -8,4 +9,5 @@ import com.common.base.BaseViewModel
  * desc   :
  */
 class HomeVm:BaseViewModel() {
+    val info=MutableLiveData<String>()
 }

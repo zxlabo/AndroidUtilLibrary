@@ -7,7 +7,7 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.adapter.CommonAdapter
-import com.ui.adapter.CommonDataItem
+import com.ui.adapter.CommonItemAdapter
 import com.ui.view.CommonRecyclerView
 import com.ui.refresh.CommonTextOverView
 import com.ui.refresh.HiRefreshLayout
@@ -65,8 +65,8 @@ open abstract class BaseListFragment : BaseFragment(), IRefresh.IRefreshListener
         pageIndex = 1
     }
 
-    open fun finishRefresh(dataItems: List<CommonDataItem<*, out RecyclerView.ViewHolder>>?) {
-        val success = dataItems != null && dataItems.isNotEmpty()
+    open fun finishRefresh(itemAdapters: List<CommonItemAdapter<*, out RecyclerView.ViewHolder>>?) {
+        val success = itemAdapters != null && itemAdapters.isNotEmpty()
         //光真么判断还是不行的，我们还需要别的措施。。。因为可能会出现 下拉单时候，有执行了删上拉分页
         val refresh = pageIndex == 1
         if (refresh) {
@@ -75,7 +75,7 @@ open abstract class BaseListFragment : BaseFragment(), IRefresh.IRefreshListener
             if (success) {
                 emptyView?.visibility = View.GONE
                 hiAdapter.clearItems()
-                hiAdapter.addItems(dataItems!!, true)
+                hiAdapter.addItems(itemAdapters!!, true)
             } else {
                 //此时就需要判断列表上是否已经有数据，如果么有，显示出空页面转态
                 if (hiAdapter.itemCount <= 0) {
@@ -84,7 +84,7 @@ open abstract class BaseListFragment : BaseFragment(), IRefresh.IRefreshListener
             }
         } else {
             if (success) {
-                hiAdapter.addItems(dataItems!!, true)
+                hiAdapter.addItems(itemAdapters!!, true)
             }
             recyclerView?.loadFinished(success)
         }
