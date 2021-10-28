@@ -2,9 +2,9 @@ package com
 
 import android.content.Intent
 import android.os.Bundle
-import com.activity.HomeActivity
 import com.activity.RefreshActivity
 import com.activity.TabTopActivity
+import com.common.utils.router.HomeRouter
 import com.demo.activity.KeyboardActivity
 import com.library.R
 import com.ui.activity.BaseToolBarActivity
@@ -15,7 +15,7 @@ class MainActivity : BaseToolBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_home.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            HomeRouter.toHomeActivity()
         }
         btn_refresh.setOnClickListener {
             startActivity(Intent(this, RefreshActivity::class.java))

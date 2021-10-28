@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 def and = rootProject.ext.android
 
@@ -16,6 +17,11 @@ android {
         versionCode and.versionCode
         versionName and.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -37,12 +43,11 @@ android {
 }
 
 def common_impl = rootProject.ext.common_impl
+def router = rootProject.ext.router
 
 dependencies {
-    common_impl.each{k, v -> implementation v}
+    common_impl.each { k, v -> implementation v }
     implementation project(path: ':common')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation router["arouter-api"]
+    kapt router["arouter-compiler"]
 }

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 def and = rootProject.ext.android
 
@@ -17,6 +18,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     buildTypes {
@@ -35,8 +41,11 @@ android {
 }
 
 def common_impl = rootProject.ext.common_impl
+def router = rootProject.ext.router
 
 dependencies {
     common_impl.each { k, v -> implementation v }
     api project(path: ':lib_base')
+    implementation router["arouter-api"]
+    kapt router["arouter-compiler"]
 }

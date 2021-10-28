@@ -3,17 +3,19 @@ package com.activity
 import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.common.base.BaseVmActivity
+import com.common.utils.router.RouterConstant
 import com.fragment.OneFragment
-import com.ui.helper.FragmentListHelper
 import com.helper.TabBottomHelper
 import com.library.databinding.ActivityHomeBinding
+import com.ui.helper.FragmentListHelper
 import com.utils.ext.inflate
 import com.utils.ext.showToast
 import com.viewmodel.HomeVm
 
+@Route(path = RouterConstant.APP_HOME)
 class HomeActivity : BaseVmActivity<HomeVm>() {
-
     override val mVm: HomeVm by viewModels()
     private val mBinding: ActivityHomeBinding by inflate()
     private var mExitTime: Long = 0
