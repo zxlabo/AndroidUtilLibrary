@@ -29,10 +29,10 @@
         android:layout_height="wrap_content"
         android:text="键盘" />
   <Button
-        android:id="@+id/btn_rich"
+        android:id="@+id/btn_web"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="富文本" />
+        android:text="web" />
 <EditText
     android:id="@+id/tv_rich"
     android:layout_width="match_parent"

@@ -167,14 +167,13 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
     /**
      * 对返回键的监听，实现网页后退
      */
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        mWebView?.let {
-            if (keyCode == KeyEvent.KEYCODE_BACK && it.canGoBack()) {
-                it.goBack()
-                return true
-            }
+
+    override fun onBackPressed() {
+        if (mWebView!=null&&mWebView!!.canGoBack()){
+            mWebView!!.goBack()
+        }else{
+            super.onBackPressed()
         }
-        return super.onKeyDown(keyCode, event)
     }
 
     /**

@@ -74,10 +74,15 @@ open class BaseToolBarActivity : BaseLifecycleActivity() {
         //添加view
         mBinding.rootLayout.addView(view, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
         //设置标题栏
-        ToolBarHelper.setToolBar(mActivity, mBinding.toolsBar.appbar, mBinding.toolsBar.toolbar, getAppBarColor(), getToolBarColor(),isShowBackButton())
+        ToolBarHelper.setToolBar(mActivity,
+            mBinding.toolsBar.appbar,
+            mBinding.toolsBar.toolbar,
+            getAppBarColor(),
+            getToolBarColor(),
+            isShowBackButton())
     }
 
-    open fun isShowBackButton(): Boolean=true
+    open fun isShowBackButton(): Boolean = true
 
     /**
      * 设置状态栏颜色
@@ -97,11 +102,15 @@ open class BaseToolBarActivity : BaseLifecycleActivity() {
         when (item.itemId) {
             // 点击返回图标事件
             android.R.id.home -> {
-                finish()
+                backClick()
                 return true
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    open fun backClick() {
+        finish()
     }
 
 }

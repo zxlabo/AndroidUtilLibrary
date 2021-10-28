@@ -6,6 +6,7 @@ import com.activity.RefreshActivity
 import com.activity.TabTopActivity
 import com.common.utils.router.HomeRouter
 import com.demo.activity.KeyboardActivity
+import com.demo.activity.WebActivity
 import com.library.R
 import com.ui.activity.BaseToolBarActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +26,9 @@ class MainActivity : BaseToolBarActivity() {
         }
         btn_keyboard.setOnClickListener {
             startActivity(Intent(this, KeyboardActivity::class.java))
+        }
+        btn_web.setOnClickListener {
+            startActivity(Intent(this, WebActivity::class.java))
         }
     }
 }
