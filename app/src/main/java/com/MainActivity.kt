@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.activity.RefreshActivity
 import com.activity.TabTopActivity
 import com.common.utils.router.HomeRouter
+import com.demo.协程.CoroutineActivity
 import com.demo.activity.KeyboardActivity
 import com.demo.activity.WebActivity
 import com.library.R
@@ -29,6 +30,10 @@ class MainActivity : BaseToolBarActivity() {
         }
         btn_web.setOnClickListener {
             startActivity(Intent(this, WebActivity::class.java))
+        }
+        btn_test.setOnClickListener {
+            startActivity(Intent(this, CoroutineActivity::class.java))
+
         }
     }
 }

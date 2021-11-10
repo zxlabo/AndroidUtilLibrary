@@ -4,42 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.demo.协程.CoroutineActivity">
 
     <Button
-        android:id="@+id/btn_home"
+        android:id="@+id/btn_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="home" />
+        android:text="顺序执行" />
 
     <Button
-        android:id="@+id/btn_refresh"
+        android:id="@+id/btn_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="refresh" />
+        android:text="并发执行" />
+
     <Button
-        android:id="@+id/btn_tab_top"
+        android:id="@+id/btn_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tab_top" />
+        android:text="自定义代码实现协程的挂起和恢复" />
+
     <Button
-        android:id="@+id/btn_keyboard"
+        android:id="@+id/btn_4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="键盘" />
-  <Button
-        android:id="@+id/btn_web"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="web" />
+        android:text="自定义挂起函数" />
     <Button
-        android:id="@+id/btn_test"
+        android:id="@+id/btn_5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="test" />
-<EditText
-    android:id="@+id/tv_rich"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"></EditText>
+        android:text="执行耗时任务" />
+
 </LinearLayout>
