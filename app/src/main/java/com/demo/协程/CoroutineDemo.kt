@@ -4,6 +4,9 @@ class CoroutineDemo {
     /**
      * 方案 1: 取消之前的任务
      * 对于排序和过滤的情况，新请求进来，取消上一个，这样的方案是很适合的。
+     * 原理：通过成员变量 activeTask 来保持对当前请求的追踪。无论何时开始一个新的排序，
+     * 都立即对当前 activeTask 中的所有任务执行 cancelAndJoin 操作。这样会在开启一次新的请求之前就会把正在进行中的排序任务给取消掉。
+     * 注意: 这个模式不适合在全局单例中使用，因为不相关的调用方是不应该相互取消。
      */
     var controlledRunner = ControlledRunner<List<String>>()
 

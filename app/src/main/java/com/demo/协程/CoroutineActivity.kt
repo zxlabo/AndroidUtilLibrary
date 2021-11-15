@@ -33,7 +33,7 @@ class CoroutineActivity : AppCompatActivity() {
             //自定义挂起函数
             //虽然这是耗时函数，但是它实现了挂起，并不会阻塞主线程
             lifecycleScope.launch {
-                val result=CoroutineScene3.parseAssetsFile(assets, "demo.txt")
+                val result = CoroutineScene3.parseAssetsFile(assets, "demo.txt")
                 printLog("Thread:${Thread.currentThread().name},result：${result}")
 
             }
@@ -52,10 +52,25 @@ class CoroutineActivity : AppCompatActivity() {
         }
     }
 
+    private fun startScene1() {
+        lifecycleScope.launch {
+            val result1 = request1()
+            val result2 = request2(result1)
+            val result3 = request3(result2)
+            updateUi(result3)
+        }
+    }
+
+    private suspend fun request1(): String {
+        // delay不会暂停线程，但会暂停所在的协程，将协程挂起
+        delay(2 * 1000)
+        //Thread.sleep(2*1000) 让线程休眠
+        printLog("request1 工作所在的线程：${Thread.currentThread().name}")
+        return "request1 的结果"
+    }
 
     private fun startScene2() {
-
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch {
             val result1 = request1()
             val deferred2 = async { request2(result1) }
             val deferred3 = async { request3(result1) }
@@ -64,32 +79,11 @@ class CoroutineActivity : AppCompatActivity() {
     }
 
 
-    private fun startScene1() {
-        GlobalScope.launch(Dispatchers.Main) {
-            printLog("11111")
-            val result1 = request1()
-            val result2 = request2(result1)
-            val result3 = request3(result2)
-            updateUi(result3)
-        }
-        printLog("22222")
-    }
-
     private fun updateUi(result3: String) {
         printLog("updateUi 工作所在的线程：${Thread.currentThread().name}")
         printLog("updateUi ${result3}")
     }
 
-    /**
-     * suspend关键字的作用：
-     */
-    suspend fun request1(): String {
-        // delay不会暂停线程，但会暂停所在的协程，将协程挂起
-        delay(2 * 1000)
-//        //Thread.sleep(2*1000) 让线程休眠
-        printLog("request1 工作所在的线程：${Thread.currentThread().name}")
-        return "request1 的结果"
-    }
 
     suspend fun request2(msg: String): String {
         delay(2 * 1000)
