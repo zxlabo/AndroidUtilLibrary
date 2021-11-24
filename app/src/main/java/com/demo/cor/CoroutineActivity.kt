@@ -52,77 +52,8 @@ class CoroutineActivity : AppCompatActivity() {
             }
         }
 
-        btn_6.setOnClickListener {
-            /**
-             * 协程取消
-             * 1、协程取消会抛出CancellationException异常
-             *
-             */
-
-            lifecycleScope.launch(Dispatchers.Default) {
-
-                job = lifecycleScope.launch(Dispatchers.Default) {
-
-                    lifecycleScope.launch(Dispatchers.Default) {
-                        repeat(10) {
-                            delay(1000)
-                            printLog("3333")
-                        }
-                    }
-                    repeat(10) {
-                        delay(1000)
-                        printLog((1/0).toString())
-                    }
-                }
-                repeat(10) {
-                    delay(1000)
-                    printLog("1111")
-                }
-            }
-
-            btn_7.setOnClickListener {
-                job?.cancel()
-            }
-
-//            val job = lifecycleScope.launch {
-//                try {
-//                    printLog("开始协程")
-//                    delay(5000)
-//                } catch (e: CancellationException) {
-//                    // StandaloneCoroutine was cancelled
-//                    printLog("catch:${e.message}")
-//                } finally {
-//                    // 对资源进行关闭和回收
-//                    printLog("执行 finally")
-//                    val msg = CoroutineScene3.getResult()
-//                    printLog("finally消息：" + msg)
-//                    printLog("协程执行完成")
-//
-////                    withContext(NonCancellable) {
-////                        printLog("执行 finally")
-////                        val msg = CoroutineScene3.getResult()
-////                        printLog("finally消息：" + msg)
-////                        printLog("协程执行完成")
-////                    }
-//
-//                }
-//            }
-//            Thread.sleep(1000)
-//            printLog("取消协程")
-//            job.cancel()
-//            printLog("执行完成")
-        }
-
-
     }
 
-    private fun work() {
-        TODO("Not yet implemented")
-    }
-
-    private suspend fun coroutine1() {
-
-    }
 
     private fun startScene1() {
         lifecycleScope.launch {
