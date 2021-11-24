@@ -24,15 +24,18 @@ object CoroutineScene3 {
              * 耗时任务，获取result
              * 开启子线程，当执行完毕，调用 continuation.resumeWith 方法，将结果回调出去
              */
-            Thread(Runnable {
-                //耗时操作
-                Thread.sleep(2000)
-                val successMsg = "result success"
-                val failThrowable = Throwable("自定义失败消息")
-                continuation.resumeWith(result = Result.success(successMsg))
-                printLog("协程恢复")
-                //  continuation.resumeWith(result = Result.failure(failThrowable))
-            }).start()
+            try {
+                Thread {
+                    //模拟耗时操作
+                    Thread.sleep(2000)
+                    val successMsg = "result success"
+                    printLog("协程恢复,将接口回调")
+                    continuation.resumeWith(result = Result.success(successMsg))
+                }.start()
+            } catch (e: Exception) {
+                printLog("发生异常：${e.message}，将异常信息回调向上传递")
+                continuation.resumeWith(result = Result.failure(e))
+            }
             /**
              * 协程取消，处理清除工作
              */

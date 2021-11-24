@@ -10,6 +10,7 @@ class CoroutineVm : ViewModel() {
 
     private  fun request1() {
         viewModelScope.launch(Dispatchers.Main) {
+            val msg="hello"
             printLog("aaa")
         }
     }
