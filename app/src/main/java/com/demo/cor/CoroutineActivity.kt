@@ -1,4 +1,4 @@
-package com.demo.协程
+package com.demo.cor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +12,7 @@ import kotlin.coroutines.Continuation
 class CoroutineActivity : AppCompatActivity() {
 
     var time = 0L
+    var job: Job? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_corountine)
@@ -50,6 +51,77 @@ class CoroutineActivity : AppCompatActivity() {
                 //打印：Thread:main,result：hello
             }
         }
+
+        btn_6.setOnClickListener {
+            /**
+             * 协程取消
+             * 1、协程取消会抛出CancellationException异常
+             *
+             */
+
+            lifecycleScope.launch(Dispatchers.Default) {
+
+                job = lifecycleScope.launch(Dispatchers.Default) {
+
+                    lifecycleScope.launch(Dispatchers.Default) {
+                        repeat(10) {
+                            delay(1000)
+                            printLog("3333")
+                        }
+                    }
+                    repeat(10) {
+                        delay(1000)
+                        printLog((1/0).toString())
+                    }
+                }
+                repeat(10) {
+                    delay(1000)
+                    printLog("1111")
+                }
+            }
+
+            btn_7.setOnClickListener {
+                job?.cancel()
+            }
+
+//            val job = lifecycleScope.launch {
+//                try {
+//                    printLog("开始协程")
+//                    delay(5000)
+//                } catch (e: CancellationException) {
+//                    // StandaloneCoroutine was cancelled
+//                    printLog("catch:${e.message}")
+//                } finally {
+//                    // 对资源进行关闭和回收
+//                    printLog("执行 finally")
+//                    val msg = CoroutineScene3.getResult()
+//                    printLog("finally消息：" + msg)
+//                    printLog("协程执行完成")
+//
+////                    withContext(NonCancellable) {
+////                        printLog("执行 finally")
+////                        val msg = CoroutineScene3.getResult()
+////                        printLog("finally消息：" + msg)
+////                        printLog("协程执行完成")
+////                    }
+//
+//                }
+//            }
+//            Thread.sleep(1000)
+//            printLog("取消协程")
+//            job.cancel()
+//            printLog("执行完成")
+        }
+
+
+    }
+
+    private fun work() {
+        TODO("Not yet implemented")
+    }
+
+    private suspend fun coroutine1() {
+
     }
 
     private fun startScene1() {
@@ -69,12 +141,28 @@ class CoroutineActivity : AppCompatActivity() {
         return "request1 的结果"
     }
 
+    private suspend fun request4() {
+        lifecycleScope.async {
+            // delay不会暂停线程，但会暂停所在的协程，将协程挂起
+            delay(2 * 1000)
+            //Thread.sleep(2*1000) 让线程休眠
+            printLog("request4 工作所在的线程：${Thread.currentThread().name}")
+
+        }
+
+    }
+
     private fun startScene2() {
         lifecycleScope.launch {
             val result1 = request1()
+            withContext(Dispatchers.IO) {
+                request4()
+            }
             val deferred2 = async { request2(result1) }
             val deferred3 = async { request3(result1) }
+            printLog("11111")
             updateUi(deferred2.await() + deferred3.await())
+            printLog("2222")
         }
     }
 
@@ -86,6 +174,7 @@ class CoroutineActivity : AppCompatActivity() {
 
 
     suspend fun request2(msg: String): String {
+        printLog("request2 执行")
         delay(2 * 1000)
         printLog("request2 工作所在的线程：${Thread.currentThread().name}")
         return "${msg}request2 的结果"

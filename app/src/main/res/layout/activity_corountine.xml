@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.demo.协程.CoroutineActivity">
+    tools:context="com.demo.cor.CoroutineActivity">
 
     <Button
         android:id="@+id/btn_1"
@@ -36,5 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="执行耗时任务" />
+    <Button
+        android:id="@+id/btn_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="协程取消" />
+    <Button
+        android:id="@+id/btn_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="协程取消" />
 
 </LinearLayout>
