@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/component-diagram
+component [Room实现层\注解+编译时处理器] as com1
+
+component [接口实现层，依赖sqlite的能力] as com2
+
+component [接口抽象层：定义数据库及CRUD接口] as com3
+com1 ..|> com2
+com2 ..|> com3
+@enduml

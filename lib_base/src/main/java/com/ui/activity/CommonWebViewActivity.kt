@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
+import com.ui.view.AgentWebView
 import com.utils.R
 import com.utils.ext.showToast
 
@@ -25,7 +26,7 @@ import com.utils.ext.showToast
  * version:
  */
 abstract class CommonWebViewActivity : BaseToolBarActivity() {
-    private var mWebView: WebView? = null
+    private var mWebView: AgentWebView? = null
     private lateinit var webUrl: String
     private lateinit var mFrameLayout: FrameLayout
     private var mProgressBar: ProgressBar? = null
@@ -43,14 +44,19 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
         setContentView(getLayout())
         mFrameLayout = getFrameLayout()
         mProgressBar = getProgressBar()
-        addWebView()
-        initWebView()
-        loadUrl(initUrl())
+        try {
+            mWebView = AgentWebView(applicationContext)
+            addWebView()
+            initWebView()
+            loadUrl(initUrl())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun loadUrl(url: String?) {
-        if (!TextUtils.isEmpty(url)){
-            webUrl =url!!
+        if (!TextUtils.isEmpty(url)) {
+            webUrl = url!!
             mWebView?.loadUrl(webUrl)
         }
     }
@@ -74,7 +80,6 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
      */
     private fun addWebView() {
         val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        mWebView = WebView(applicationContext)
         mWebView?.layoutParams = params
         //设置WebView取消右边滚动条和水波纹效果
         mWebView?.overScrollMode = View.OVER_SCROLL_NEVER
@@ -169,9 +174,9 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
      */
 
     override fun onBackPressed() {
-        if (mWebView!=null&&mWebView!!.canGoBack()){
+        if (mWebView != null && mWebView!!.canGoBack()) {
             mWebView!!.goBack()
-        }else{
+        } else {
             super.onBackPressed()
         }
     }
@@ -205,7 +210,7 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
 
         //加载页面的服务器出现错误时（如404）调用。
         override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-            webViewLoadError(view,request,error)
+            webViewLoadError(view, request, error)
         }
 
         //webView默认是不处理https请求的，页面显示空白，需要进行如下设置

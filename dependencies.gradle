@@ -12,6 +12,7 @@ ext {
     versions = [
             "kotlin_version" : "1.5.21",
             "arouter_version": "1.5.2",
+            "roomVersion"    : "2.3.0",
     ]
 
     common_impl = [
@@ -29,6 +30,13 @@ ext {
     router = [
             "arouter-api"     : "com.alibaba:arouter-api:${versions["arouter_version"]}",
             "arouter-compiler": "com.alibaba:arouter-compiler:${versions["arouter_version"]}",
+    ]
+    room = [
+            "room-runtime" : "androidx.room:room-runtime:${versions["roomVersion"]}",
+            // optional - Kotlin Extensions and Coroutines support for Room
+            "room-ktx"     : "androidx.room:room-ktx:${versions["roomVersion"]}",
+            // To use Kotlin annotation processing tool (kapt
+            "room-compiler": "androidx.room:room-compiler:${versions["roomVersion"]}"
     ]
 
 }

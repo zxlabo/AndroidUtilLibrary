@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface SupportSQLiteOpenHelper {
+    getWritableDatabase()
+    getReadableDatabase()
+}
+class FrameworkSQLiteOpenHelper{
+SQLiteOpenHelper openHelper 实现数据库创建、打开的能力
+}
+FrameworkSQLiteOpenHelper ..|> SupportSQLiteOpenHelper
+
+interface SupportSQLiteDatabase{
+void beginTransaction();
+boolean inTransaction();
+Cursor query(String query);
+long insert(String table, int conflictAlgorithm,
+            ContentValues values)
+int delete(String table, String whereClause,
+            Object[] whereArgs);
+int update(String table, int conflictAlgorithm,
+            ContentValues values, String whereClause,
+            Object[] whereArgs);
+void execSQL(String sql)
+}
+class FrameworkSQLiteDatabase{
+SQLiteDatabase dataBase; 实现数据增删改查事务提交的能力；
+}
+FrameworkSQLiteDatabase   ..|> SupportSQLiteDatabase
+
+interface SupportSQLiteStatement{
+ void execute();
+ int executeUpdateDelete();
+ long executeInsert();
+ long simpleQueryForLong();
+ }
+
+ class FrameworkSQLiteStatement{
+ SQLiteStatement mDelegate;实现增删改查的能力
+ }
+
+ FrameworkSQLiteStatement   ..|> SupportSQLiteStatement
+
+class Room实现层 {
+注解+编译时处理
+}
+Room实现层 --> FrameworkSQLiteStatement
+Room实现层 --> FrameworkSQLiteDatabase
+Room实现层 --> FrameworkSQLiteOpenHelper
+@enduml
+

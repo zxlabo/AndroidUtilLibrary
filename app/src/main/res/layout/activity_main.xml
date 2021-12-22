@@ -18,28 +18,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="refresh" />
+
     <Button
         android:id="@+id/btn_tab_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tab_top" />
+
     <Button
         android:id="@+id/btn_keyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="键盘" />
-  <Button
+
+    <Button
         android:id="@+id/btn_web"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="web" />
     <Button
+        android:id="@+id/btn_coroutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="协程" />
+
+    <Button
+        android:id="@+id/btn_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="插入" />
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查询" />
+
+    <Button
         android:id="@+id/btn_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test" />
-<EditText
-    android:id="@+id/tv_rich"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"></EditText>
 </LinearLayout>

@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+static def buildTime() {
+    return new Date().format("EE yyyy HH:mm:ss", TimeZone.getTimeZone("GMT+08:00"))
+}
+
+def and = rootProject.ext.android
+
+android {
+    compileSdkVersion and.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion and.minSdkVersion
+        targetSdkVersion and.targetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("String", "BUILD_TIME", "\"" + buildTime() + "\"")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+}
+
+dependencies {
+    common_impl.each { k, v -> implementation v }
+    implementation project(path: ':lib_base')
+    implementation project(path: ':lib_ui')
+}

@@ -9,7 +9,8 @@ import com.common.base.BaseViewModel
  * date   : 2021/9/28
  * desc   :
  */
-class HomeVm:BaseViewModel() {
+class HomeVm : BaseViewModel() {
     protected val _coroutinesLiveData: MutableLiveData<String> = MutableLiveData()
     val coroutinesLiveData: LiveData<String> = _coroutinesLiveData
+    val mData =MutableLiveData<String>()
 }

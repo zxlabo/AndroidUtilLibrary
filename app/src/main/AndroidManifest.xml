@@ -13,12 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name="com.demo.cor.CoroutineActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.demo.activity.WebActivity"
-            android:exported="true" />
+
         <activity android:name="com.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.demo.cor.CoroutineActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.demo.activity.WebActivity"
+            android:exported="true" />
         <activity
             android:name="com.demo.activity.KeyboardActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="com.activity.TabTopActivity" />
-        <activity android:name="com.activity.RefreshActivity" />
         <activity android:name="com.activity.HomeActivity" />
     </application>
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--只有debug模式下生效-->
+    <debug-overrides>
+        <trust-anchors>
+<!--            <certificates src="@raw/charles"/>-->
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

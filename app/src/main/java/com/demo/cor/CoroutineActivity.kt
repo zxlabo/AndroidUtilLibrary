@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
+import com.demo.work.UploadWorker
 import com.library.R
 import kotlinx.android.synthetic.main.activity_corountine.*
 import kotlinx.coroutines.*
+import java.io.IOException
+import java.util.*
 import kotlin.coroutines.Continuation
 
 class CoroutineActivity : AppCompatActivity() {
@@ -31,6 +37,7 @@ class CoroutineActivity : AppCompatActivity() {
             CoroutineScene2_decompiled.request1(callback)
         }
         btn_4.setOnClickListener {
+
             //自定义挂起函数
             //虽然这是耗时函数，但是它实现了挂起，并不会阻塞主线程
             lifecycleScope.launch {
@@ -50,6 +57,31 @@ class CoroutineActivity : AppCompatActivity() {
                 printLog("Thread:${Thread.currentThread().name},result：${msg}")
                 //打印：Thread:main,result：hello
             }
+        }
+        btn_6.setOnClickListener {
+
+            val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+            scope.safeLaunch(work = {
+                printLog("work")
+                val result = CoroutineScene3.getResult()
+                printLog(result)
+            }, onCompleted = {
+                printLog("onCompleted")
+            }, onError = {
+                printLog("onError:${it.message}")
+            })
+
+
+        }
+
+        btn_7.setOnClickListener {
+            val uploadWorkRequest: WorkRequest =
+                OneTimeWorkRequestBuilder<UploadWorker>()
+                    .build()
+
+            WorkManager
+                .getInstance(this)
+                .enqueue(uploadWorkRequest)
         }
 
     }
