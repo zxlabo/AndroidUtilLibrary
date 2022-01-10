@@ -2,35 +2,36 @@ package com
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.activity.TabTopActivity
-import com.bean.StudentBean
 import com.common.utils.router.HomeRouter
 import com.demo.activity.KeyboardActivity
 import com.demo.activity.WebActivity
-import com.demo.cor.CoroutineActivity
+import com.demo.coroutine_demo.CoroutineActivity
+import com.demo.coroutine_demo.printLog
+import com.demo.msg_demo.HandlerDemoActivity
+import com.demo.room.DemoDataBase
+import com.demo.room.DemoTable
 import com.library.BuildConfig
 import com.library.R
-import com.library.cache.LibStorage
-import com.ui.activity.BaseToolBarActivity
 import com.library.executor.LibExecutor
+import com.ui.activity.BaseToolBarActivity
+import com.utils.WifiUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : BaseToolBarActivity() {
+    var i = 0;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
-        }
-
-        btn_tab_top.setOnClickListener {
-            startActivity(Intent(this, TabTopActivity::class.java))
-        }
-        btn_keyboard.setOnClickListener {
-            startActivity(Intent(this, KeyboardActivity::class.java))
         }
         btn_web.setOnClickListener {
             startActivity(Intent(this, WebActivity::class.java))
@@ -38,25 +39,34 @@ class MainActivity : BaseToolBarActivity() {
         btn_coroutine.setOnClickListener {
             startActivity(Intent(this, CoroutineActivity::class.java))
         }
+        btn_handler.setOnClickListener {
+            startActivity(Intent(this, HandlerDemoActivity::class.java))
+        }
+        btn_tab_top.setOnClickListener {
+            startActivity(Intent(this, TabTopActivity::class.java))
+        }
+        btn_keyboard.setOnClickListener {
+            startActivity(Intent(this, KeyboardActivity::class.java))
+        }
+
         btn_insert.setOnClickListener {
             LibExecutor.execute(runnable = {
-                val bean = StudentBean(11, "xiaoming")
-                LibStorage.saveCache("hello", bean)
+                val bean = DemoTable()
+                bean.cache_Key = "hello${i++}"
+                DemoDataBase.get(this).cacheDao().insert(bean)
             })
 
         }
-
         btn_query.setOnClickListener {
-            LibExecutor.execute(runnable = {
-                val bean = LibStorage.getCache<StudentBean>("hello")
-                Log.e("===", bean?.toString()?:"")
-            })
-
+            DemoDataBase.get(this).cacheDao().query2()
         }
+
         btn_test.setOnClickListener {
-
+            printLog(WifiUtils.checkWifiIsEnable().toString())
         }
+
     }
+
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {

@@ -1,4 +1,4 @@
-package com.demo.cor;
+package com.demo.coroutine_demo;
 
 import android.util.Log;
 

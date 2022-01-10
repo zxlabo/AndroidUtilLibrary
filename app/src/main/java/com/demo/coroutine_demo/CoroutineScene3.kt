@@ -1,10 +1,9 @@
-package com.demo.cor
+package com.demo.coroutine_demo
 
 import android.content.res.AssetManager
 import android.util.Log
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.StringBuilder
 

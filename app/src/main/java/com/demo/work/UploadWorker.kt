@@ -3,8 +3,8 @@ package com.demo.work
 import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.demo.cor.printLog
-import com.demo.cor.safeLaunch
+import com.demo.coroutine_demo.printLog
+import com.demo.coroutine_demo.safeLaunch
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

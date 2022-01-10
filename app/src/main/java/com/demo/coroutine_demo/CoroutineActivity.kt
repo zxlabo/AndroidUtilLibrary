@@ -1,4 +1,4 @@
-package com.demo.cor
+package com.demo.coroutine_demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,9 +11,9 @@ import com.demo.work.UploadWorker
 import com.library.R
 import kotlinx.android.synthetic.main.activity_corountine.*
 import kotlinx.coroutines.*
-import java.io.IOException
-import java.util.*
+import kotlinx.coroutines.NonCancellable.isCancelled
 import kotlin.coroutines.Continuation
+import kotlin.coroutines.CoroutineContext
 
 class CoroutineActivity : AppCompatActivity() {
 
@@ -70,8 +70,6 @@ class CoroutineActivity : AppCompatActivity() {
             }, onError = {
                 printLog("onError:${it.message}")
             })
-
-
         }
 
         btn_7.setOnClickListener {
@@ -83,7 +81,52 @@ class CoroutineActivity : AppCompatActivity() {
                 .getInstance(this)
                 .enqueue(uploadWorkRequest)
         }
+        btn_8.setOnClickListener {
+            testCancel()
 
+        }
+
+
+    }
+
+    /**
+     * 测试协程取消
+     * 父协程的取消，同时会取消子协程，但不会影响兄弟协程和它的父协程。
+     */
+
+    private fun testCancel() {
+        var i = 0
+        var j = 0
+        var job2: Job?=null
+        runBlocking {
+          val job1=  launch(Dispatchers.Default+CoroutineName("1111")) {
+                job2 = launch(Dispatchers.Default+CoroutineName("2222")) {
+                    var nextTime2 = System.currentTimeMillis()
+                    while (j < 5) {
+                        if (System.currentTimeMillis() > nextTime2) {
+                            printLog("执行child----${j}${isActive}${this.coroutineContext.get(CoroutineName)}")
+                            j++
+                            nextTime2 += 500
+                        }
+                    }
+                }
+
+                var nextTime = System.currentTimeMillis()
+                while (i < 5) {
+                    if (System.currentTimeMillis() > nextTime) {
+                        printLog("执行f----${i}${isActive}${this.coroutineContext.get(CoroutineName)}")
+                        i++
+                        nextTime += 500
+                    }
+                }
+
+            }
+            delay(1000)
+            printLog("取消协程")
+            job1.cancel()
+//            job2.cancel()
+
+        }
     }
 
 

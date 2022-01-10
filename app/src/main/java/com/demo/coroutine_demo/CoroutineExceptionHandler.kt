@@ -1,4 +1,4 @@
-package com.demo.cor
+package com.demo.coroutine_demo
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
