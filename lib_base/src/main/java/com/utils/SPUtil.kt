@@ -57,4 +57,11 @@ object SPUtil {
         }
         return null
     }
+
+    /**
+     * 清除sp
+     */
+    fun clearAppDefaultSp() {
+        getShared()?.edit()?.clear()?.commit()
+    }
 }
