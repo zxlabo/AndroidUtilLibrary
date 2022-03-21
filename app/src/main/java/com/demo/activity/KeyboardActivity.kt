@@ -2,8 +2,8 @@ package com.demo.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import com.utils.SoftHideKeyBoardUtil
-import com.library.R
+import com.labo.utils.SoftHideKeyBoardUtil
+import com.labo.library.R
 import com.ui.activity.BaseToolBarActivity
 
 /**

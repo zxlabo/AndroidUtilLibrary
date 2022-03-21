@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
-import com.utils.R;
+import com.labo.utils.R;
 
 
 public class CommonTextOverView extends AbsOverView {

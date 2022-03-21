@@ -16,9 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ui.tab.common.ITabLayout;
-import com.utils.R;
-import com.utils.SizeUtils;
-import com.utils.ViewUtil;
+import com.labo.utils.R;
+import com.labo.utils.SizeUtils;
+import com.labo.utils.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

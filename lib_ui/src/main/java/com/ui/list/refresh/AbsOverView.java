@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.utils.SizeUtils;
+import com.labo.utils.SizeUtils;
 
 /**
  * 下拉刷新的Overlay视图,可以重载这个类来定义自己的Overlay

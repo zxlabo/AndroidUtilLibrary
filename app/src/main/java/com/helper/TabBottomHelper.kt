@@ -1,11 +1,11 @@
 package com.helper
 
 import android.graphics.BitmapFactory
-import com.library.R
+import com.labo.library.R
 import com.ui.tab.bottom.TabBottomBean
 import com.ui.tab.bottom.TabBottomLayout
-import com.utils.AppGlobals
-import com.utils.SizeUtils
+import com.labo.utils.AppGlobals
+import com.labo.utils.SizeUtils
 
 /**
  * author : Naruto

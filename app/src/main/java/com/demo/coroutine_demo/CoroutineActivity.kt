@@ -8,12 +8,10 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.demo.work.UploadWorker
-import com.library.R
+import com.labo.library.R
 import kotlinx.android.synthetic.main.activity_corountine.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.NonCancellable.isCancelled
 import kotlin.coroutines.Continuation
-import kotlin.coroutines.CoroutineContext
 
 class CoroutineActivity : AppCompatActivity() {
 

@@ -12,23 +12,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="home" />
+
     <Button
         android:id="@+id/btn_coroutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="协程" />
+
+    <Button
+        android:id="@+id/btn_thread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多线程" />
+
     <Button
         android:id="@+id/btn_web"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="web" />
+
+    <Button
+        android:id="@+id/btn_annotation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义注解" />
+
     <Button
         android:id="@+id/btn_handler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="消息机制" />
-
-
 
 
     <Button
@@ -50,13 +63,12 @@
         android:text="键盘" />
 
 
-
-
     <Button
         android:id="@+id/btn_insert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="插入" />
+
     <Button
         android:id="@+id/btn_query"
         android:layout_width="wrap_content"
@@ -64,13 +76,15 @@
         android:text="查询" />
 
     <Button
+        android:id="@+id/btn_java"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="java" />
+
+    <Button
         android:id="@+id/btn_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test" />
-    <Switch
-        android:id="@+id/voiceBtn"
-        android:layout_width="60dp"
-        android:layout_height="38dp"
-        android:checked="true" />
+
 </LinearLayout>

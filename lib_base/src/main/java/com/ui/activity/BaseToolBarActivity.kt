@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import com.utils.BarUtils
-import com.utils.databinding.ActivityBaseBinding
+import com.labo.utils.BarUtils
+import com.labo.utils.databinding.ActivityBaseBinding
 
 /**
  * author : Naruto

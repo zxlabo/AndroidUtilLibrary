@@ -2,25 +2,24 @@ package com
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
 import android.view.KeyEvent
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.activity.TabTopActivity
 import com.common.utils.router.HomeRouter
+import com.demo.ThreadDemoActivity
+import com.demo.activity.AspectActivity
 import com.demo.activity.KeyboardActivity
 import com.demo.activity.WebActivity
 import com.demo.coroutine_demo.CoroutineActivity
-import com.demo.coroutine_demo.printLog
 import com.demo.msg_demo.HandlerDemoActivity
 import com.demo.room.DemoDataBase
 import com.demo.room.DemoTable
-import com.library.BuildConfig
-import com.library.R
-import com.library.executor.LibExecutor
+import com.labo.library.BuildConfig
+import com.labo.library.R
+import com.labo.library.executor.LibExecutor
+import com.study.JavaActivity
 import com.ui.activity.BaseToolBarActivity
-import com.utils.WifiUtils
+import com.labo.utils.SpeechUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -29,6 +28,7 @@ class MainActivity : BaseToolBarActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
@@ -48,6 +48,15 @@ class MainActivity : BaseToolBarActivity() {
         btn_keyboard.setOnClickListener {
             startActivity(Intent(this, KeyboardActivity::class.java))
         }
+        btn_thread.setOnClickListener {
+            startActivity(Intent(this, ThreadDemoActivity::class.java))
+        }
+        btn_annotation.setOnClickListener {
+            startActivity(Intent(this, AspectActivity::class.java))
+        }
+        btn_java.setOnClickListener {
+            startActivity(Intent(this, JavaActivity::class.java))
+        }
 
         btn_insert.setOnClickListener {
             LibExecutor.execute(runnable = {
@@ -60,11 +69,9 @@ class MainActivity : BaseToolBarActivity() {
         btn_query.setOnClickListener {
             DemoDataBase.get(this).cacheDao().query2()
         }
-
         btn_test.setOnClickListener {
-            printLog(WifiUtils.checkWifiIsEnable().toString())
+            SpeechUtils.getInstance(this).speakText("请最晚在11:50出发，去给王鹏送饭")
         }
-
     }
 
 

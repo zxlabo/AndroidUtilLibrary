@@ -7,7 +7,6 @@ import android.net.http.SslError
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
@@ -16,8 +15,8 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import com.ui.view.AgentWebView
-import com.utils.R
-import com.utils.ext.showToast
+import com.labo.utils.R
+import com.labo.utils.ext.showToast
 
 /**
  * author : Naruto
@@ -281,7 +280,30 @@ abstract class CommonWebViewActivity : BaseToolBarActivity() {
             }
             return super.onJsPrompt(view, url, message, defaultValue, result)
         }
+
+        var mFilePathCallback: ValueCallback<Array<Uri>>? = null
+        override fun onShowFileChooser(webView: WebView?,
+            filePathCallback: ValueCallback<Array<Uri>>?,
+            fileChooserParams: FileChooserParams?): Boolean {
+            fileChooserParams?.acceptTypes?.let { acceptTypes ->
+                //判断文件类型
+                if (acceptTypes.contains("image/*")) {
+                    mFilePathCallback = filePathCallback
+                   showSelectDialog(mFilePathCallback)
+                    return true
+                }
+            }
+            return super.onShowFileChooser(webView, filePathCallback, fileChooserParams)
+        }
+
+//        private fun showSelectDialog() {
+//            mFilePathCallback?.onReceiveValue(null)
+//            mFilePathCallback = null
+//            Log.e("===","aaaa")
+//        }
     }
+
+    open fun showSelectDialog(mFilePathCallback: ValueCallback<Array<Uri>>?) {}
 
 }
 

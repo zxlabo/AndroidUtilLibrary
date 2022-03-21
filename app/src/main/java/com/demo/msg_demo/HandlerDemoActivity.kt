@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import com.library.R
+import com.labo.library.R
 
 class HandlerDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

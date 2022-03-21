@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'android-aspectjx'
 }
 def and = rootProject.ext.android
 
@@ -41,6 +42,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    aspectjx {
+        //排除所有package路径中包含`android.support`的class文件及库（jar文件）
+        exclude 'com.google','com.appsflyer','com.android','android.support','versions.9'
+    }
 }
 
 def common_impl = rootProject.ext.common_impl
@@ -51,7 +56,7 @@ dependencies {
     implementation project(path: ':common')
     implementation router["arouter-api"]
     implementation 'androidx.work:work-runtime-ktx:2.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     kapt router["arouter-compiler"]
@@ -61,5 +66,13 @@ dependencies {
     implementation room["room-runtime"]
     implementation room["room-ktx"]
     kapt room["room-compiler"]
+
+    implementation project(path: ':apt-annotaion')
+    implementation project(path: ':apt-library')
+    kapt project(path: ':apt-processor')
+    //ASM依赖
+    implementation 'org.ow2.asm:asm:5.0.3'
+    implementation 'org.ow2.asm:asm-commons:5.0.3'
+
 
 }

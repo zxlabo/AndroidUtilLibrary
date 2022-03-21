@@ -6,13 +6,15 @@ apply plugin: 'com.alibaba.arouter'
 buildscript {
     ext.kotlin_version = "1.5.10"
     repositories {
-        google()
-        mavenCentral()
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
         classpath "com.alibaba:arouter-register:1.0.2"
+        //沪江插件：https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
     }
 }
 

@@ -8,10 +8,10 @@ import com.common.base.BaseVmActivity
 import com.common.utils.router.RouterConstant
 import com.fragment.OneFragment
 import com.helper.TabBottomHelper
-import com.library.databinding.ActivityHomeBinding
+import com.labo.library.databinding.ActivityHomeBinding
 import com.ui.helper.FragmentListHelper
-import com.utils.ext.inflate
-import com.utils.ext.showToast
+import com.labo.utils.ext.inflate
+import com.labo.utils.ext.showToast
 import com.viewmodel.HomeVm
 
 @Route(path = RouterConstant.APP_HOME)

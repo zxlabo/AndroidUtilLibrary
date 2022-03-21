@@ -1,7 +1,7 @@
 ext {
 
     config = [
-            applicationId: "com.library",
+            applicationId: "com.labo.library",
             versionCode  : 1,
             versionName  : "1.0"
     ]

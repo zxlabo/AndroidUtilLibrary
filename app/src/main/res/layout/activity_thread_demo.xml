@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.demo.ThreadDemoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="多个线程异步执行任务，主线程需要等待它们都完成再继续，有哪些实现方式？"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/btn_count_down_latch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CountDownLatch 计数器"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_future"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CompletableFuture"
+        android:textAllCaps="false" />
+    <Button
+        android:id="@+id/btn_wait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="wait-notify 使用"
+        android:textAllCaps="false" />
+
+</LinearLayout>

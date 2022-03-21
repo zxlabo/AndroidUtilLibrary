@@ -1,10 +1,8 @@
 package com.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.tabs.TabLayout
-import com.library.R
+import com.labo.library.R
 import com.ui.tab.top.TabTopBean
 import com.ui.tab.top.TabTopLayout
 

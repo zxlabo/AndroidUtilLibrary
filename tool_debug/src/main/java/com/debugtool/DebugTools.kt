@@ -2,7 +2,8 @@ package com.debugtool
 
 import android.content.Context
 import android.os.Process
-import com.utils.SPUtil
+import com.labo.library.fps.FpsMonitor
+import com.labo.utils.SPUtil
 
 
 class DebugTools {
@@ -26,6 +27,10 @@ class DebugTools {
         Process.killProcess(Process.myPid())
     }
 
+    @HiDebug(name = "打开/关闭Fps", desc = "打开后可以查看页面实时的FPS")
+    fun toggleFps(context: Context) {
+        FpsMonitor.toggle()
+    }
 
 //
 //    fun buildDevice(): String {
@@ -42,10 +47,7 @@ class DebugTools {
 //    }
 //
 //
-//    @HiDebug(name = "打开/关闭Fps", desc = "打开后可以查看页面实时的FPS")
-//    fun toggleFps(context: Context) {
-//        FpsMonitor.toggle()
-//    }
+
 //
 //
 //    @HiDebug(name = "打开/关闭暗黑模式", desc = "打开暗黑模式在夜间使用更温和")

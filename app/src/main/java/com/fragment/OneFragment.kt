@@ -1,6 +1,6 @@
 package com.fragment
 
-import com.library.R
+import com.labo.library.R
 import com.ui.fragment.BaseFragment
 
 /**
