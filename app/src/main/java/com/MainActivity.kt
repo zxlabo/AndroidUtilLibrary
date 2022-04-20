@@ -14,12 +14,12 @@ import com.demo.coroutine_demo.CoroutineActivity
 import com.demo.msg_demo.HandlerDemoActivity
 import com.demo.room.DemoDataBase
 import com.demo.room.DemoTable
-import com.labo.library.BuildConfig
-import com.labo.library.R
 import com.labo.library.executor.LibExecutor
 import com.study.JavaActivity
 import com.ui.activity.BaseToolBarActivity
 import com.labo.utils.SpeechUtils
+import com.library.BuildConfig
+import com.library.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 

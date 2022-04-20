@@ -1,7 +1,7 @@
 package com.helper
 
 import android.graphics.BitmapFactory
-import com.labo.library.R
+import com.library.R
 import com.ui.tab.bottom.TabBottomBean
 import com.ui.tab.bottom.TabBottomLayout
 import com.labo.utils.AppGlobals

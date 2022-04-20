@@ -8,7 +8,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.demo.work.UploadWorker
-import com.labo.library.R
+import com.library.R
 import kotlinx.android.synthetic.main.activity_corountine.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.Continuation

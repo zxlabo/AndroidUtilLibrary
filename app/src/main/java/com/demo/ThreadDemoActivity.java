@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.labo.library.R;
+import com.library.R;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;

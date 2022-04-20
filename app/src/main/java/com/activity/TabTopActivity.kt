@@ -2,7 +2,7 @@ package com.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.labo.library.R
+import com.library.R
 import com.ui.tab.top.TabTopBean
 import com.ui.tab.top.TabTopLayout
 

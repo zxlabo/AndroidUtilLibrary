@@ -3,7 +3,7 @@ package com.demo.activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.labo.library.R
+import com.library.R
 import kotlinx.android.synthetic.main.activity_aspect.*
 
 class AspectActivity : AppCompatActivity() {
