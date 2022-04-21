@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'android-aspectjx'
+    id 'com.hujiang.android-aspectjx'
 }
 def and = rootProject.ext.android
 
@@ -70,9 +70,6 @@ dependencies {
     implementation project(path: ':apt-annotaion')
     implementation project(path: ':apt-library')
     kapt project(path: ':apt-processor')
-    //ASM依赖
-    implementation 'org.ow2.asm:asm:5.0.3'
-    implementation 'org.ow2.asm:asm-commons:5.0.3'
 
 
 }

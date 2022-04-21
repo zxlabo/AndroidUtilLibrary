@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.library">
+    package="com.apple.dance">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name="com.MyApplication"
+        android:name="com.apple.dance.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.MainActivity">
+        <activity android:name="com.apple.dance.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,29 +23,29 @@
         </activity>
 
         <activity
-            android:name="com.study.JavaActivity"
+            android:name="com.apple.dance.activity.JavaActivity"
             android:exported="true" />
         <activity
-            android:name="com.demo.activity.AspectActivity"
+            android:name="com.apple.dance.activity.AspectActivity"
             android:exported="true" />
         <activity
-            android:name="com.demo.ThreadDemoActivity"
+            android:name="com.apple.dance.activity.ThreadDemoActivity"
             android:exported="true" />
 
         <activity
-            android:name="com.demo.coroutine_demo.CoroutineActivity"
+            android:name="com.apple.dance.coroutine_demo.CoroutineActivity"
             android:exported="true" />
         <activity
-            android:name="com.demo.msg_demo.HandlerDemoActivity"
+            android:name="com.apple.dance.activity.HandlerDemoActivity"
             android:exported="true" />
         <activity
-            android:name="com.demo.activity.WebActivity"
+            android:name="com.apple.dance.activity.WebActivity"
             android:exported="true" />
         <activity
-            android:name="com.demo.activity.KeyboardActivity"
+            android:name="com.apple.dance.activity.KeyboardActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.activity.TabTopActivity" />
-        <activity android:name="com.activity.HomeActivity" />
+        <activity android:name="com.apple.dance.activity.TabTopActivity" />
+        <activity android:name="com.apple.dance.activity.HomeActivity" />
     </application>
 
 </manifest>

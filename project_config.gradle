@@ -1,7 +1,7 @@
 ext {
 
     config = [
-            applicationId: "com.labo.library",
+            applicationId: "com.apple.dance",
             versionCode  : 1,
             versionName  : "1.0"
     ]
