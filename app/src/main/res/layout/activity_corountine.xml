@@ -54,6 +54,11 @@
         android:id="@+id/btn_8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="取消 " />
+        android:text="测试父协程取消对子协程的影响及子取消对父的影响 " />
+    <Button
+        android:id="@+id/btn_9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="捕获协程取消的异常" />
 
 </LinearLayout>

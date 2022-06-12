@@ -81,7 +81,34 @@ class CoroutineActivity : AppCompatActivity() {
         }
         btn_8.setOnClickListener {
             testCancel()
-
+        }
+        btn_9.setOnClickListener {
+            /**
+             * 没有捕获到
+             */
+            runBlocking<Unit> {
+                val job = launch (SupervisorJob()+Dispatchers.Default) {
+                    try {
+                        var i=0;
+                        var nextTime = System.currentTimeMillis()
+                        while (i < 5) {
+                            if (System.currentTimeMillis() > nextTime) {
+                                printLog("执行f----${i}${isActive}${this.coroutineContext.get(CoroutineName)}")
+                                i++
+                                nextTime += 500
+                            }
+                        }
+                    } catch (e: CancellationException){
+                        printLog("Work cancelled!")
+                    } finally {
+                        printLog("Clean up!")
+                    }
+                }
+                delay(1000L)
+                printLog("Cancel!")
+                job.cancel()
+                printLog("Done!")
+            }
         }
 
 
