@@ -11,10 +11,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.TextView
-import com.labo.library.log.HiLog
-import com.labo.utils.ActivityManager
-import com.labo.utils.AppGlobals
-import com.labo.utils.R
+import com.labo.lib.tool.log.HiLog
+import com.labo.lib.tool.utils.ActivityManager
+import com.labo.lib.tool.utils.AppGlobals
+import com.labo.lib.tool.utils.R
 import java.text.DecimalFormat
 
 object FpsMonitor {

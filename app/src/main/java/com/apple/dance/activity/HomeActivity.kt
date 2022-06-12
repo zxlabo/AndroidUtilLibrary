@@ -10,8 +10,8 @@ import com.common.utils.router.RouterConstant
 import com.apple.dance.fragment.OneFragment
 import com.apple.dance.helper.TabBottomHelper
 import com.ui.helper.FragmentListHelper
-import com.labo.utils.ext.inflate
-import com.labo.utils.ext.showToast
+import com.labo.lib.tool.utils.ext.inflate
+import com.labo.lib.tool.utils.ext.showToast
 import com.apple.dance.viewmodel.HomeVm
 
 @Route(path = RouterConstant.APP_HOME)

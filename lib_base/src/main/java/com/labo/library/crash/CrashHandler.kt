@@ -7,10 +7,10 @@ import android.os.Environment
 import android.os.Process
 import android.os.StatFs
 import android.text.format.Formatter
-import com.labo.library.log.HiLog
-import com.labo.utils.ActivityManager
-import com.labo.utils.AppGlobals
-import com.labo.utils.BuildConfig
+import com.labo.lib.tool.log.HiLog
+import com.labo.lib.tool.utils.ActivityManager
+import com.labo.lib.tool.utils.AppGlobals
+import com.labo.lib.tool.utils.BuildConfig
 import java.io.*
 import java.lang.Exception
 import java.text.SimpleDateFormat

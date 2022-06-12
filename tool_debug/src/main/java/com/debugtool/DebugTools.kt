@@ -3,7 +3,7 @@ package com.debugtool
 import android.content.Context
 import android.os.Process
 import com.labo.library.fps.FpsMonitor
-import com.labo.utils.SPUtil
+import com.labo.lib.tool.utils.SPUtil
 
 
 class DebugTools {

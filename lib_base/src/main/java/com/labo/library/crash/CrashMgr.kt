@@ -1,6 +1,6 @@
 package com.labo.library.crash
 
-import com.labo.utils.AppGlobals
+import com.labo.lib.tool.utils.AppGlobals
 import java.io.File
 
 object CrashMgr {

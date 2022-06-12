@@ -1,7 +1,7 @@
 package com.labo.library.fps
 
 import android.view.Choreographer
-import com.labo.library.log.HiLog
+import com.labo.lib.tool.log.HiLog
 import java.util.concurrent.TimeUnit
 
 internal class FrameMonitor : Choreographer.FrameCallback {

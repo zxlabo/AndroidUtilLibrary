@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import com.ui.tab.common.ITabView;
-import com.labo.utils.R;
+import com.labo.lib.tool.utils.R;
 
 
 public class TabTopView extends RelativeLayout implements ITabView<TabTopBean<?>> {

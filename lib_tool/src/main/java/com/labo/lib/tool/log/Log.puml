@@ -1,0 +1,79 @@
+@startuml
+class LogUtils{
+   + static void v(String tag,String msg)
+   + static void d(String tag,String msg)
+   + static void i(String tag,String msg)
+   + static void w(String tag,String msg)
+   + static void e(String tag,String msg)
+   + static void log(@NonNull LogConfig config,@LogType.TYPE int type,@NonNull String tag,String msg)
+}
+note left of LogUtils:Log日志库的门面类
+LogUtils.. LogPrinter
+LogUtils.. LogManager
+
+class LogManager {
+     + static LogManager getInstance()//获取LogManager的单例对象
+     + static void init(LogConfig config,LogPrinter... printer)//初始化日志库
+     + LogConfig getConfig()
+     + List<LogPrinter> getPrinters()
+     + void addPrinter(LogPrinter printer)
+     + void removePrinter(LogPrinter printer)
+}
+note left of LogManager:Log日志库的管理类
+LogManager o-- LogPrinter
+LogManager o-- LogConfig
+
+abstract LogConfig{
+    JsonParser injectJsonParser()
+
+    String getGlobalTag()
+    boolean enable()
+    boolean includeThread()
+    int stackTraceDepth()
+    LogPrinter[] printers()
+}
+LogConfig *-- ThreadFormatter
+LogConfig *-- StackTraceFormatter
+
+interface LogFormatter<T>{
+    String format(T data);
+}
+class ThreadFormatter{
+}
+LogFormatter <|..ThreadFormatter
+
+class StackTraceFormatter{
+}
+LogFormatter <|..StackTraceFormatter
+
+interface JsonParser {
+        String toJson(Object src);
+}
+
+note right of LogPrinter:LogPrinter日志打印接口，基于该接口可以自定义日志打印方式。
+interface LogPrinter {
+        void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString);
+}
+class ConsolePrinter{
+}
+note bottom of ConsolePrinter:日志控制台打印器
+LogPrinter <|..ConsolePrinter
+
+class ViewPrinter{
+}
+note bottom of ViewPrinter:日志视图打印器
+LogPrinter <|..ViewPrinter
+
+class FilePrinter{
+}
+note bottom of FilePrinter:日志文件打印器
+LogPrinter <|..FilePrinter
+
+class LogStackTraceUtil{
+}
+class LogModel{
+}
+class LogType{
+}
+
+@enduml

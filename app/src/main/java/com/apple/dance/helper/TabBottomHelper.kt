@@ -4,8 +4,8 @@ import android.graphics.BitmapFactory
 import com.apple.dance.R
 import com.ui.tab.bottom.TabBottomBean
 import com.ui.tab.bottom.TabBottomLayout
-import com.labo.utils.AppGlobals
-import com.labo.utils.SizeUtils
+import com.labo.lib.tool.utils.AppGlobals
+import com.labo.lib.tool.utils.SizeUtils
 
 /**
  * author : Naruto

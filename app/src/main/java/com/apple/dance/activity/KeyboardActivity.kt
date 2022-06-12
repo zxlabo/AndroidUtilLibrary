@@ -2,7 +2,7 @@ package com.apple.dance.activity
 
 import android.os.Bundle
 import android.os.PersistableBundle
-import com.labo.utils.SoftHideKeyBoardUtil
+import com.labo.lib.tool.utils.SoftHideKeyBoardUtil
 import com.apple.dance.R
 import com.ui.activity.BaseToolBarActivity
 

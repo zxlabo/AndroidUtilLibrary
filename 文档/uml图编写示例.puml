@@ -20,6 +20,8 @@ class Food
 class Human{
 void eat(Food)
 }
+'4、聚合关系 o--	
+
 '4、备注
 class Foo
 note top: 这是备注

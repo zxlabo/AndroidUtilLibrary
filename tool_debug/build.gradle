@@ -45,4 +45,5 @@ dependencies {
     common_impl.each { k, v -> implementation v }
     implementation project(path: ':lib_base')
     implementation project(path: ':lib_ui')
+    implementation project(path: ':lib_tool')
 }

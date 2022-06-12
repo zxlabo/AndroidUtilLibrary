@@ -33,5 +33,6 @@ android {
 
 dependencies {
     implementation project(path: ':lib_base')
+    implementation project(path: ':lib_tool')
     common_impl.each { k, v -> implementation v }
 }

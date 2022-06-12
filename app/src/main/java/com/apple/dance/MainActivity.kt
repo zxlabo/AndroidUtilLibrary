@@ -2,7 +2,6 @@ package com.apple.dance
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
 import com.apple.dance.activity.TabTopActivity
@@ -18,7 +17,7 @@ import com.apple.dance.room.DemoTable
 import com.labo.library.executor.LibExecutor
 import com.apple.dance.activity.JavaActivity
 import com.ui.activity.BaseToolBarActivity
-import com.labo.utils.SpeechUtils
+import com.labo.lib.tool.utils.SpeechUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 

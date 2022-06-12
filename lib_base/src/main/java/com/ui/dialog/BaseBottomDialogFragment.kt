@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.ViewGroup
-import com.labo.utils.R
+import com.labo.lib.tool.utils.R
 
 /**
  * author : Naruto

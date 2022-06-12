@@ -15,8 +15,8 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import com.ui.view.AgentWebView
-import com.labo.utils.R
-import com.labo.utils.ext.showToast
+import com.labo.lib.tool.utils.R
+import com.labo.lib.tool.utils.ext.showToast
 
 /**
  * author : Naruto

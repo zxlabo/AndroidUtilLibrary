@@ -3,7 +3,7 @@ package com.labo.library.cache
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.labo.utils.AppGlobals
+import com.labo.lib.tool.utils.AppGlobals
 
 /**
  * room数据库离线缓存框架

@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import com.ui.tab.common.ITab;
-import com.labo.utils.R;
+import com.labo.lib.tool.utils.R;
 
 public class TabBottomView extends RelativeLayout implements ITab<TabBottomBean<?>> {
     private TabBottomBean<?> tabInfo;

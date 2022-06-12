@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ui.tab.common.ITabLayout;
-import com.labo.utils.SizeUtils;
+import com.labo.lib.tool.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
