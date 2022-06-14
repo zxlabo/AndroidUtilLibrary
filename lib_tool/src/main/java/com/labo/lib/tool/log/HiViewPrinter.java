@@ -19,12 +19,13 @@ import java.util.List;
 /**
  * HiViewPrinter 将log显示在界面上
  */
-public class HiViewPrinter implements HiLogPrinter {
+public class HiViewPrinter extends HiLogPrinter {
     private RecyclerView recyclerView;
     private LogAdapter adapter;
     private HiViewPrinterProvider viewProvider;
 
-    public HiViewPrinter(Activity activity) {
+    public HiViewPrinter(Activity activity, @NonNull HiLogConfig config) {
+        super(config);
         FrameLayout rootView = activity.findViewById(android.R.id.content);
         recyclerView = new RecyclerView(activity);
         adapter = new LogAdapter(LayoutInflater.from(recyclerView.getContext()));
@@ -45,13 +46,17 @@ public class HiViewPrinter implements HiLogPrinter {
     }
 
     @Override
-    public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
+    protected String formatMsg(Object[] contents) {
+        return LogMsgUtil.parseBody(contents, config);
+    }
 
+    @Override
+    void print(int level, String tag, @NonNull String contents) {
         // 将log展示添加到recycleView
-        adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, printString));
-
+        adapter.addItem(new HiLogMo(System.currentTimeMillis(), level, tag, contents));
         // 滚动到对应的位置
         recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+
     }
 
     private static class LogAdapter extends RecyclerView.Adapter<LogViewHolder> {

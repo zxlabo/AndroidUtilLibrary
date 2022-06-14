@@ -4,9 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.apple.dance.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,38 +16,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.apple.dance.MainActivity">
+        <activity
+            android:name=".activity.LogDemoActivity"
+            android:exported="true" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.apple.dance.activity.JavaActivity"
+            android:name=".activity.JavaActivity"
             android:exported="true" />
         <activity
-            android:name="com.apple.dance.activity.AspectActivity"
+            android:name=".activity.AspectActivity"
             android:exported="true" />
         <activity
-            android:name="com.apple.dance.activity.ThreadDemoActivity"
-            android:exported="true" />
-
-        <activity
-            android:name="com.apple.dance.coroutine_demo.CoroutineActivity"
+            android:name=".activity.ThreadDemoActivity"
             android:exported="true" />
         <activity
-            android:name="com.apple.dance.activity.HandlerDemoActivity"
+            android:name=".coroutine_demo.CoroutineActivity"
             android:exported="true" />
         <activity
-            android:name="com.apple.dance.activity.WebActivity"
+            android:name=".activity.HandlerDemoActivity"
             android:exported="true" />
         <activity
-            android:name="com.apple.dance.activity.KeyboardActivity"
+            android:name=".activity.WebActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.KeyboardActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.apple.dance.activity.TabTopActivity" />
-        <activity android:name="com.apple.dance.activity.HomeActivity" />
+        <activity android:name=".activity.TabTopActivity" />
+        <activity android:name=".activity.HomeActivity" />
     </application>
 
 </manifest>

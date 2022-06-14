@@ -4,18 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
-import com.apple.dance.activity.TabTopActivity
+import com.apple.dance.activity.*
 import com.common.utils.router.HomeRouter
-import com.apple.dance.activity.ThreadDemoActivity
-import com.apple.dance.activity.AspectActivity
-import com.apple.dance.activity.KeyboardActivity
-import com.apple.dance.activity.WebActivity
 import com.apple.dance.coroutine_demo.CoroutineActivity
-import com.apple.dance.activity.HandlerDemoActivity
 import com.apple.dance.room.DemoDataBase
 import com.apple.dance.room.DemoTable
 import com.labo.library.executor.LibExecutor
-import com.apple.dance.activity.JavaActivity
 import com.ui.activity.BaseToolBarActivity
 import com.labo.lib.tool.utils.SpeechUtils
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,6 +24,9 @@ class MainActivity : BaseToolBarActivity() {
         setContentView(R.layout.activity_main)
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
+        }
+        btn_log.setOnClickListener {
+            startActivity(Intent(this, LogDemoActivity::class.java))
         }
         btn_web.setOnClickListener {
             startActivity(Intent(this, WebActivity::class.java))

@@ -5,55 +5,31 @@ class LogUtils{
    + static void i(String tag,String msg)
    + static void w(String tag,String msg)
    + static void e(String tag,String msg)
-   + static void log(@NonNull LogConfig config,@LogType.TYPE int type,@NonNull String tag,String msg)
+   +  public static void log(@HiLogType.TYPE int type, @NonNull String tag, Object... contents)
 }
+
 note left of LogUtils:Log日志库的门面类
 LogUtils.. LogPrinter
 LogUtils.. LogManager
 
 class LogManager {
      + static LogManager getInstance()//获取LogManager的单例对象
-     + static void init(LogConfig config,LogPrinter... printer)//初始化日志库
-     + LogConfig getConfig()
+     + void addPrinter(HiLogPrinter printer)
+     + void addPrinters(HiLogPrinter[] printers)
      + List<LogPrinter> getPrinters()
-     + void addPrinter(LogPrinter printer)
      + void removePrinter(LogPrinter printer)
 }
 note left of LogManager:Log日志库的管理类
 LogManager o-- LogPrinter
-LogManager o-- LogConfig
-
-abstract LogConfig{
-    JsonParser injectJsonParser()
-
-    String getGlobalTag()
-    boolean enable()
-    boolean includeThread()
-    int stackTraceDepth()
-    LogPrinter[] printers()
-}
-LogConfig *-- ThreadFormatter
-LogConfig *-- StackTraceFormatter
-
-interface LogFormatter<T>{
-    String format(T data);
-}
-class ThreadFormatter{
-}
-LogFormatter <|..ThreadFormatter
-
-class StackTraceFormatter{
-}
-LogFormatter <|..StackTraceFormatter
-
-interface JsonParser {
-        String toJson(Object src);
-}
 
 note right of LogPrinter:LogPrinter日志打印接口，基于该接口可以自定义日志打印方式。
-interface LogPrinter {
-        void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString);
+abstract LogPrinter {
+    protected HiLogConfig config;
+    protected abstract String formatMsg(Object[] contents);
+    abstract void print(int level, String tag, @NonNull String contents);
 }
+LogPrinter o-- LogConfig
+
 class ConsolePrinter{
 }
 note bottom of ConsolePrinter:日志控制台打印器
@@ -69,11 +45,39 @@ class FilePrinter{
 note bottom of FilePrinter:日志文件打印器
 LogPrinter <|..FilePrinter
 
+abstract LogConfig{
+    JsonParser injectJsonParser()
+
+    boolean enable()
+    boolean includeThread()
+    int stackTraceDepth()
+}
+LogConfig *-- ThreadFormatter
+LogConfig *-- StackTraceFormatter
+
+interface LogFormatter<T>{
+    String format(T data);
+}
+class ThreadFormatter{
+}
+LogFormatter <|..ThreadFormatter
+
+class StackTraceFormatter{
+}
+LogFormatter <|..StackTraceFormatter
+
+note top of JsonParser:日志序列化接口
+interface JsonParser {
+    String toJson(Object src);
+}
+note top of LogStackTraceUtil:日志堆栈工具类
 class LogStackTraceUtil{
 }
+note top of LogModel:日志model
 class LogModel{
 }
-class LogType{
+note bottom of LogType:基于注解，创建日志类型类，规定函数传参。
+annotation LogType{
 }
 
 @enduml

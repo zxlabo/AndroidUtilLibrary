@@ -1,6 +1,10 @@
 package com.labo.lib.tool.log;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
+
+import com.labo.lib.tool.utils.AppGlobals;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.BlockingQueue;
@@ -21,13 +26,27 @@ import java.util.concurrent.LinkedBlockingQueue;
  * 2、线程同步；
  * 2、文件操作，BufferedWriter的应用；
  */
-public class HiFilePrinter implements HiLogPrinter {
+public class HiFilePrinter extends HiLogPrinter {
+
+    private static volatile HiFilePrinter instance;
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
     private final String logPath;
     private final long retentionTime;
     private LogWriter writer;
     private volatile PrintWorker worker;
-    private static HiFilePrinter instance;
+    private static final String LOG_FILE = File.separator + "log";
+    private List<String> whiteList;
+
+    /**
+     * 创建HiFilePrinter
+     */
+    public static HiFilePrinter getInstance(List<String> whiteList,@NonNull HiLogConfig config ) {
+        return getInstance(null, 0,  whiteList,config);
+    }
+
+    public void setWhiteList(List<String> whiteList) {
+        this.whiteList = whiteList;
+    }
 
     /**
      * 创建HiFilePrinter
@@ -35,37 +54,51 @@ public class HiFilePrinter implements HiLogPrinter {
      * @param logPath       log保存路径，如果是外部路径需要确保已经有外部存储的读写权限
      * @param retentionTime log文件的有效时长，单位毫秒，<=0表示一直有效
      */
-    public static synchronized HiFilePrinter getInstance(String logPath, long retentionTime) {
+    public static HiFilePrinter getInstance(String logPath, long retentionTime, List<String> whiteList, @NonNull HiLogConfig config) {
         if (instance == null) {
-            instance = new HiFilePrinter(logPath, retentionTime);
+            synchronized (HiFilePrinter.class) {
+                if (instance == null) {
+                    if (TextUtils.isEmpty(logPath)) {
+                        logPath = AppGlobals.INSTANCE.getContext().getFilesDir().getAbsolutePath() + LOG_FILE;
+                    }
+                    instance = new HiFilePrinter(logPath, retentionTime, whiteList, config);
+                }
+            }
         }
         return instance;
     }
 
-
-    private HiFilePrinter(String logPath, long retentionTime) {
+    private HiFilePrinter(String logPath, long retentionTime, List<String> whiteList, HiLogConfig config) {
+        super(config);
         this.logPath = logPath;
         this.retentionTime = retentionTime;
         this.writer = new LogWriter();
         this.worker = new PrintWorker();
+        this.whiteList = whiteList;
         cleanExpiredLog();
     }
 
+    @Override
+    protected String formatMsg(Object[] contents) {
+        return LogMsgUtil.parseBody(contents, config);
+    }
 
     @Override
-    public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
+    void print(int level, String tag, @NonNull String contents) {
         long timeMillis = System.currentTimeMillis();
         if (!worker.isRunning()) {
             worker.start();
         }
-        worker.put(new HiLogMo(timeMillis, level, tag, printString));
+        if (whiteList.contains(tag)){
+            worker.put(new HiLogMo(timeMillis, level, tag, contents));
+        }
     }
+
 
     private void doPrint(HiLogMo logMo) {
         String lastFileName = writer.getPreFileName();
         if (lastFileName == null) {
             String newFileName = genFileName();
-
             if (writer.isReady()) {
                 writer.close();
             }
@@ -73,7 +106,6 @@ public class HiFilePrinter implements HiLogPrinter {
                 return;
             }
         }
-
         writer.append(logMo.flattenedLog());
     }
 
@@ -187,7 +219,6 @@ public class HiFilePrinter implements HiLogPrinter {
         boolean ready(String newFileName) {
             preFileName = newFileName;
             logFile = new File(logPath, newFileName);
-
             // 当log文件不存在时创建log文件
             if (!logFile.exists()) {
                 try {

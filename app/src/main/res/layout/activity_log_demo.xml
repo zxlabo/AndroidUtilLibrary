@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.LogDemoActivity">
+
+    <Button
+        android:id="@+id/btn_console"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加控制台打印" />
+
+    <Button
+        android:id="@+id/btn_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加可视化打印" />
+
+    <Button
+        android:id="@+id/btn_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加文件打印器" />
+
+    <Button
+        android:id="@+id/btn_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打印日志 hello" />
+
+    <Button
+        android:id="@+id/btn_wordl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打印日志 world" />
+</androidx.appcompat.widget.LinearLayoutCompat>

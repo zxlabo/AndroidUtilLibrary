@@ -3,14 +3,35 @@ package com.labo.lib.tool.log;
 import static com.labo.lib.tool.log.HiLogConfig.MAX_LEN;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 
-public class HiConsolePrinter implements HiLogPrinter {
+public class HiConsolePrinter extends HiLogPrinter {
+
+    private static  HiConsolePrinter instance;
+
+    private HiConsolePrinter(HiLogConfig config) {
+        super(config);
+    }
+
+    public static HiConsolePrinter getInstance(@NonNull HiLogConfig config){
+        if (instance==null){
+            synchronized (HiConsolePrinter.class){
+                if (instance==null){
+                    instance = new HiConsolePrinter(config);
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
-    public void print(@NonNull HiLogConfig config, int level, String tag, @NonNull String printString) {
+    protected String formatMsg(@NonNull Object[] contents) {
+        return LogMsgUtil.getCommonMsg(config, contents);
+    }
+
+    @Override
+    void print(int level, String tag, @NonNull String printString) {
         int len = printString.length();
         int countOfSub = len / MAX_LEN;
         if (countOfSub > 0) {
