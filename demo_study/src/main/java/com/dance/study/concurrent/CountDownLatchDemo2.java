@@ -1,4 +1,4 @@
-package com.study.concurrent;
+package com.dance.study.concurrent;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

@@ -12,7 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="home" />
-
+    <Button
+        android:id="@+id/btn_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arouter Service" />
     <Button
         android:id="@+id/btn_log"
         android:layout_width="wrap_content"

@@ -3,7 +3,9 @@ package com.apple.dance.activity
 import android.view.KeyEvent
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.apple.dance.databinding.ActivityHomeBinding
 import com.common.base.BaseVmActivity
 import com.common.utils.router.RouterConstant
@@ -14,12 +16,11 @@ import com.labo.lib.tool.utils.ext.inflate
 import com.labo.lib.tool.utils.ext.showToast
 import com.apple.dance.viewmodel.HomeVm
 
-@Route(path = RouterConstant.APP_HOME)
+@Route(path = RouterConstant.APP_HOME,extras = 1)
 class HomeActivity : BaseVmActivity<HomeVm>() {
     override val mVm: HomeVm by viewModels()
     private val mBinding: ActivityHomeBinding by inflate()
     private var mExitTime: Long = 0
-
     override fun initView() {
         setContentView(mBinding.root)
         hideToolBar()

@@ -1,4 +1,4 @@
-package com.study.concurrent;
+package com.dance.study.concurrent;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 

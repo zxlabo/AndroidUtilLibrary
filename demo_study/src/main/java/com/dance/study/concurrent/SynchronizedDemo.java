@@ -1,4 +1,4 @@
-package com.study.concurrent;
+package com.dance.study.concurrent;
 
 import java.util.ArrayList;
 import java.util.List;

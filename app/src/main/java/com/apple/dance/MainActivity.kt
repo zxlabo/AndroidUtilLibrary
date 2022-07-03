@@ -2,16 +2,22 @@ package com.apple.dance
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
+import com.alibaba.android.arouter.launcher.ARouter
 import com.apple.dance.activity.*
-import com.common.utils.router.HomeRouter
 import com.apple.dance.coroutine_demo.CoroutineActivity
 import com.apple.dance.room.DemoDataBase
 import com.apple.dance.room.DemoTable
+import com.common.component_service.person_center.PERSON_CENTER_SERVICE_PATH
+import com.common.utils.router.HomeRouter
+import com.common.component_service.person_center.PersonCenterService
+import com.common.component_service.person_center.PersonCenterService2
+import com.common.utils.RouterServiceManager
+import com.labo.lib.tool.utils.SpeechUtils
 import com.labo.library.executor.LibExecutor
 import com.ui.activity.BaseToolBarActivity
-import com.labo.lib.tool.utils.SpeechUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -24,6 +30,18 @@ class MainActivity : BaseToolBarActivity() {
         setContentView(R.layout.activity_main)
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
+        }
+        btn_service.setOnClickListener {
+
+            val service = ARouter.getInstance().build(PERSON_CENTER_SERVICE_PATH).navigation() as? PersonCenterService
+            if (service != null) {
+                Log.e("====", service.sayHello(" xiao_ming"))
+            }
+           val service2= RouterServiceManager.getInstance().getService(PERSON_CENTER_SERVICE_PATH) as? PersonCenterService2
+            if (service2 != null) {
+                Log.e("====", service2.sayHello(" xiao_ming"))
+            }
+
         }
         btn_log.setOnClickListener {
             startActivity(Intent(this, LogDemoActivity::class.java))

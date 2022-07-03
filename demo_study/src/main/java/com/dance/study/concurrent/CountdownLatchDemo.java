@@ -1,4 +1,4 @@
-package com.study.concurrent;
+package com.dance.study.concurrent;
 
 import org.jetbrains.annotations.NotNull;
 
