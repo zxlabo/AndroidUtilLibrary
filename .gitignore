@@ -43,3 +43,8 @@ freeline/
 freeline.py
 freeline_project_description.json
 /lib-demo/
+/hs_err_pid6423.log
+/hs_err_pid6476.log
+/app/schemas/com.apple.dance.room.DemoDataBase/1.json
+/app/schemas/com.dance.zx.demo.room.DemoDataBase/1.json
+/app/schemas/com.labo.zx.demo.room.DemoDataBase/1.json
