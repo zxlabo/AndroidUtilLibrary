@@ -60,5 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="捕获协程取消的异常" />
-
+    <Button
+        android:id="@+id/btn_10"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel和cancelAndJoin" />
 </LinearLayout>

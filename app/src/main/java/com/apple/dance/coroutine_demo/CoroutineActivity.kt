@@ -87,9 +87,9 @@ class CoroutineActivity : AppCompatActivity() {
              * 没有捕获到
              */
             runBlocking<Unit> {
-                val job = launch (SupervisorJob()+Dispatchers.Default) {
+                val job = launch(SupervisorJob() + Dispatchers.Default) {
                     try {
-                        var i=0;
+                        var i = 0;
                         var nextTime = System.currentTimeMillis()
                         while (i < 5) {
                             if (System.currentTimeMillis() > nextTime) {
@@ -98,7 +98,7 @@ class CoroutineActivity : AppCompatActivity() {
                                 nextTime += 500
                             }
                         }
-                    } catch (e: CancellationException){
+                    } catch (e: CancellationException) {
                         printLog("Work cancelled!")
                     } finally {
                         printLog("Clean up!")
@@ -110,7 +110,9 @@ class CoroutineActivity : AppCompatActivity() {
                 printLog("Done!")
             }
         }
-
+        btn_10.setOnClickListener {
+            testCancel2()
+        }
 
     }
 
@@ -122,10 +124,10 @@ class CoroutineActivity : AppCompatActivity() {
     private fun testCancel() {
         var i = 0
         var j = 0
-        var job2: Job?=null
+        var job2: Job? = null
         runBlocking {
-          val job1=  launch(Dispatchers.Default+CoroutineName("1111")) {
-                job2 = launch(Dispatchers.Default+CoroutineName("2222")) {
+            val job1 = launch(Dispatchers.Default + CoroutineName("1111")) {
+                job2 = launch(Dispatchers.Default + CoroutineName("2222")) {
                     var nextTime2 = System.currentTimeMillis()
                     while (j < 5) {
                         if (System.currentTimeMillis() > nextTime2) {
@@ -148,12 +150,38 @@ class CoroutineActivity : AppCompatActivity() {
             }
             delay(1000)
             printLog("取消协程")
-            job1.cancel()
+            job1.cancelAndJoin()
 //            job2.cancel()
+            printLog("执行这里了")
+            /**
+             * cancel()和cancelJoin(),前者立即停止协程执行并执行后面代码，后者需要等待协程执行完成后在执行后面的代码。
+             * 但是至于停止了协程之后，协程里面的任务是否继续执行，要看协程里面代码自己的判断。
+             */
+
 
         }
     }
 
+    /**
+     * cancel()和cancelJoin(),前者立即停止协程执行并执行后面代码，后者需要等待协程执行完成后在执行后面的代码。
+     * 但是至于停止了协程之后，协程里面的任务是否继续执行，要看协程里面代码自己的判断。
+     * cancel 打印结果:        开始测试、协程开始执行、取消协程、测试完成、协程执行完成
+     * cancelAndJoin 打印结果：开始测试、协程开始执行、取消协程、协程执行完成、测试完成
+     */
+    private fun testCancel2() {
+        runBlocking {
+            printLog("开始测试")
+            val job1 = launch(Dispatchers.IO) {
+                printLog("协程开始执行")
+                Thread.sleep(1500)
+                printLog("协程执行完成")
+            }
+            delay(1000)
+            printLog("取消协程")
+            job1.cancelAndJoin()
+            printLog("测试完成")
+        }
+    }
 
     private fun startScene1() {
         lifecycleScope.launch {
@@ -218,6 +246,7 @@ class CoroutineActivity : AppCompatActivity() {
     }
 
     fun printLog(msg: String) {
-        Log.e("测试：${System.currentTimeMillis() - time}", msg)
+//        Log.e("测试：${System.currentTimeMillis() - time}${Thread.currentThread().name}", msg)
+        Log.e("测试", msg)
     }
 }
