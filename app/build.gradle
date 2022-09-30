@@ -73,5 +73,6 @@ dependencies {
     kapt project(path: ':apt-processor')
     runtimeOnly project(path: ':component_person_center')
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
 
 }

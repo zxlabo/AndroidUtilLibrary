@@ -2,12 +2,16 @@ package com.apple.dance
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
 import android.util.Log
 import android.view.KeyEvent
 import androidx.fragment.app.DialogFragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.apple.dance.activity.*
 import com.apple.dance.coroutine_demo.CoroutineActivity
+import com.apple.dance.fragment.Person
+import com.apple.dance.fragment.SerializableDialog
+import com.apple.dance.fragment.Student
 import com.apple.dance.room.DemoDataBase
 import com.apple.dance.room.DemoTable
 import com.common.component_service.person_center.PERSON_CENTER_SERVICE_PATH
@@ -31,13 +35,16 @@ class MainActivity : BaseToolBarActivity() {
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
         }
+        btn_bottom_sheet.setOnClickListener {
+            startActivity(Intent(this, BottomSheetActivity::class.java))
+        }
         btn_service.setOnClickListener {
 
             val service = ARouter.getInstance().build(PERSON_CENTER_SERVICE_PATH).navigation() as? PersonCenterService
             if (service != null) {
                 Log.e("====", service.sayHello(" xiao_ming"))
             }
-           val service2= RouterServiceManager.getInstance().getService(PERSON_CENTER_SERVICE_PATH) as? PersonCenterService2
+            val service2 = RouterServiceManager.getInstance().getService(PERSON_CENTER_SERVICE_PATH) as? PersonCenterService2
             if (service2 != null) {
                 Log.e("====", service2.sayHello(" xiao_ming"))
             }
@@ -83,7 +90,8 @@ class MainActivity : BaseToolBarActivity() {
             DemoDataBase.get(this).cacheDao().query2()
         }
         btn_test.setOnClickListener {
-            SpeechUtils.getInstance(this).speakText("请最晚在11:50出发，去给王鹏送饭")
+           val dialog= SerializableDialog.getInstance()
+            dialog.show(supportFragmentManager,"")
         }
     }
 
@@ -107,4 +115,5 @@ class MainActivity : BaseToolBarActivity() {
             }
         }
     }
+    
 }
