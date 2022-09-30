@@ -35,6 +35,9 @@ class MainActivity : BaseToolBarActivity() {
         btn_home.setOnClickListener {
             HomeRouter.toHomeActivity()
         }
+        btn_crash.setOnClickListener {
+            startActivity(Intent(this, KotlinCrashActivity::class.java))
+        }
         btn_bottom_sheet.setOnClickListener {
             startActivity(Intent(this, BottomSheetActivity::class.java))
         }
