@@ -6,6 +6,7 @@ object CrashUtils {
     }
 
     fun getList(): List<String> {
+        mutableListOf<String>()
         val list = listOf<String>()
         return list
     }

@@ -8,6 +8,8 @@ import android.view.View;
 import com.apple.dance.CrashUtils;
 import com.apple.dance.R;
 
+import java.util.List;
+
 /**
  * 梳理常见的kotlin-crash
  */
